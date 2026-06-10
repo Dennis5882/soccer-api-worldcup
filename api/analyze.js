@@ -27,7 +27,7 @@ function setCors(res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   setCors(res);
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST')   return res.status(405).end();
@@ -73,25 +73,21 @@ export default async function handler(req, res) {
       return { head: json.SS_Table.HEAD, data: json.SS_Table.DATA };
     }
 
-    // Reactions
     log('Fetching reactions...', 'info');
     const react = parseTable(await fetchTable('REACTIONG'));
     if (react) log(`Reactions: ${react.data.length} rows`);
     else       log('No reaction data', 'info');
 
-    // Displacements
     log('Fetching displacements...', 'info');
     const disp = parseTable(await fetchTable('DISPLACEMENTG'));
     if (disp) log(`Displacements: ${disp.data.length} rows`);
     else      log('No displacement data', 'info');
 
-    // Internal forces
     log('Fetching internal forces...', 'info');
     const force = parseTable(await fetchTable('BEAMFORCE', { PARTS:['PartI','PartJ'] }));
     if (force) log(`Internal forces: ${force.data.length} rows`);
     else       log('No internal force data', 'info');
 
-    // Stress ratio
     log('Fetching stress ratio...', 'info');
     let stress = null;
     try {
@@ -102,11 +98,11 @@ export default async function handler(req, res) {
       log(`Stress ratio skipped (${se.message})`, 'info');
     }
 
-    log('🎉 Analysis and result retrieval complete!');
+    log('Analysis and result retrieval complete!');
     return res.json({ ok: true, logs, react, disp, force, stress, lcNames });
 
   } catch (e) {
     log(`Error: ${e.message}`, 'err');
     return res.json({ ok: false, error: e.message, logs });
   }
-}
+};

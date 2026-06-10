@@ -63,7 +63,7 @@ function setCors(res) {
 }
 
 // ── Handler ─────────────────────────────────────────────────────
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   setCors(res);
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST')   return res.status(405).end();
@@ -112,7 +112,7 @@ export default async function handler(req, res) {
     });
     sr?.error
       ? log(`Section failed: ${sr.error.message}`, 'err')
-      : log(`Section: ${sectName} (${sectH}×${sectB} mm)`);
+      : log(`Section: ${sectName} (${sectH}x${sectB} mm)`);
 
     // Nodes
     const na = {};
@@ -161,7 +161,7 @@ export default async function handler(req, res) {
         });
         wr?.error
           ? log(`Self-weight failed: ${wr.error.message}`, 'err')
-          : log(`  Self-weight (${lc.swDir} × ${lc.swVal})`);
+          : log(`  Self-weight (${lc.swDir} x ${lc.swVal})`);
       } else {
         let nlNodes;
         if      (lc.nlMode === 'all')    nlNodes = verts.map((_,i) => i);
@@ -186,11 +186,11 @@ export default async function handler(req, res) {
     }
 
     const productName = product === 'gen' ? 'Gen NX' : 'Civil NX';
-    log(`🎉 ${productName} model generated!`);
+    log(`${productName} model generated!`);
     return res.json({ ok: true, logs });
 
   } catch (e) {
     log(`Error: ${e.message}`, 'err');
     return res.json({ ok: false, error: e.message, logs });
   }
-}
+};
