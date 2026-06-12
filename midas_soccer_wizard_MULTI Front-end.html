@@ -1,0 +1,1827 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experience the Latest MIDAS API Technology with the 2026 World Cup</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f5f7fa;color:#1a1a2e}
+header{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;padding:16px 28px;display:flex;align-items:center;gap:14px}
+header .logo{font-size:2.2rem;flex-shrink:0}
+header h1{font-size:1.15rem;font-weight:700;line-height:1.3}
+header .meta{font-size:.72rem;opacity:.6;margin-top:4px;letter-spacing:.3px}
+.steps{display:flex;background:white;border-bottom:1px solid #e0e0e0;padding:0 16px;overflow-x:auto}
+.step-item{padding:12px 14px;font-size:.78rem;color:#999;border-bottom:3px solid transparent;cursor:default;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.step-item.active{color:#4361ee;border-color:#4361ee;font-weight:600}
+.step-item.done{color:#2ec4b6;border-color:#2ec4b6}
+.step-num{width:19px;height:19px;border-radius:50%;background:#eee;color:#999;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;flex-shrink:0}
+.step-item.active .step-num{background:#4361ee;color:white}
+.step-item.done   .step-num{background:#2ec4b6;color:white}
+.step-trial{cursor:pointer!important;color:#ef4444!important;border-bottom-color:#ef4444!important}
+.step-trial .step-num{background:linear-gradient(135deg,#f59e0b,#ef4444)!important;color:white!important}
+.step-trial:hover{background:#fff5f5}
+.container{max-width:960px;margin:24px auto;padding:0 16px}
+.card{background:white;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:26px;margin-bottom:18px}
+.card h2{font-size:1.05rem;font-weight:600;margin-bottom:18px;color:#16213e}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+label{font-size:.8rem;font-weight:500;color:#555}
+input,select{padding:8px 11px;border:1px solid #ddd;border-radius:7px;font-size:.88rem;transition:border .2s;font-family:inherit;background:white}
+input:focus,select:focus{outline:none;border-color:#4361ee;box-shadow:0 0 0 3px rgba(67,97,238,.1)}
+.sec-label{font-size:.76rem;font-weight:600;color:#4361ee;text-transform:uppercase;letter-spacing:.8px;margin:18px 0 10px;padding-bottom:5px;border-bottom:1px solid #eef}
+.btn{padding:9px 22px;border-radius:7px;font-size:.88rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:inherit}
+.btn-primary{background:#4361ee;color:white}
+.btn-primary:hover{background:#3451d1;transform:translateY(-1px)}
+.btn-secondary{background:#f0f0f0;color:#333}
+.btn-secondary:hover{background:#e0e0e0}
+.btn-success{background:#2ec4b6;color:white}
+.btn-success:hover{background:#25a99d;transform:translateY(-1px)}
+.btn-danger{background:#ff6b6b;color:white;font-size:.8rem;padding:6px 14px}
+.btn-danger:hover{background:#e05555}
+.btn-analyze{background:linear-gradient(135deg,#7c3aed,#4361ee);color:white;width:100%;padding:13px;font-size:.98rem}
+.btn-analyze:hover{background:linear-gradient(135deg,#6d28d9,#3451d1);transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.btn-row{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.metric{background:#f8f9ff;border:1px solid #e8ebff;border-radius:10px;padding:14px;text-align:center}
+.metric-val{font-size:1.5rem;font-weight:700;color:#4361ee}
+.metric-lbl{font-size:.76rem;color:#888;margin-top:3px}
+#plot{width:100%;height:420px;border-radius:10px;overflow:hidden}
+.log-box{background:#1a1a2e;color:#a8e6cf;border-radius:10px;padding:14px;font-family:monospace;font-size:.83rem;line-height:1.8;min-height:80px;max-height:200px;overflow-y:auto}
+.progress-wrap{margin:14px 0}
+.progress-bar-bg{background:#eee;border-radius:99px;height:7px;overflow:hidden}
+.progress-bar{background:linear-gradient(90deg,#4361ee,#2ec4b6);height:100%;border-radius:99px;transition:width .4s ease;width:0%}
+.progress-label{font-size:.78rem;color:#888;margin-top:5px}
+.notice{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:14px 18px;display:flex;gap:10px;align-items:flex-start;margin-top:16px}
+.hint-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.hint-card{background:white;border:1px solid #ffe082;border-radius:8px;padding:12px;text-align:center}
+.hint-card .icon{font-size:1.4rem;margin-bottom:5px}
+.hint-card .title{font-size:.8rem;font-weight:600;color:#555;margin-bottom:3px}
+.hint-card .desc{font-size:.76rem;color:#888;line-height:1.4}
+.hint-card code{background:#f5f5f5;padding:1px 5px;border-radius:4px;font-size:.82rem}
+.alert{padding:11px 15px;border-radius:8px;font-size:.86rem;margin-bottom:14px}
+.alert-error{background:#fff0f0;border:1px solid #ffcdd2;color:#c62828}
+.alert-info{background:#e8f4fd;border:1px solid #bee3f8;color:#2b6cb0}
+.alert-success{background:#f0fff4;border:1px solid #c8e6c9;color:#1b5e20}
+.hidden{display:none!important}
+/* Product selection card */
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:8px 0 16px}
+.prod-card{border:3px solid #e0e0e0;border-radius:16px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .25s;position:relative;background:white}
+.prod-card:hover{border-color:#4361ee;background:#f8f9ff;transform:translateY(-3px);box-shadow:0 8px 28px rgba(67,97,238,.18)}
+.prod-card.selected{border-color:#4361ee;background:#eef0ff;box-shadow:0 4px 18px rgba(67,97,238,.22)}
+.prod-check{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;background:#4361ee;color:white;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;opacity:0;transition:opacity .2s}
+.prod-card.selected .prod-check{opacity:1}
+.prod-icon{width:80px;height:80px;margin-bottom:14px;object-fit:contain;display:block;margin-left:auto;margin-right:auto}
+.prod-name{font-size:1.2rem;font-weight:700;color:#16213e;margin-bottom:10px}
+.prod-desc{font-size:.82rem;color:#666;line-height:1.75}
+.prod-badge{display:inline-block;background:#e8ebff;color:#4361ee;border-radius:20px;padding:3px 12px;font-size:.74rem;font-weight:600;margin-top:10px}
+/* Boundary conditions */
+.support-types{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.sup-card{border:2px solid #e0e0e0;border-radius:9px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.sup-card:hover{border-color:#4361ee;background:#f8f9ff}
+.sup-card.selected{border-color:#4361ee;background:#eef0ff}
+.sup-card .sicon{font-size:1.5rem;margin-bottom:5px}
+.sup-card .sname{font-size:.8rem;font-weight:600;color:#333}
+.sup-card .sdesc{font-size:.73rem;color:#888;margin-top:2px}
+.dof-grid{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.dof-item{display:flex;align-items:center;gap:5px;background:#f8f9ff;border:1px solid #e0e8ff;border-radius:6px;padding:6px 10px;font-size:.82rem;cursor:pointer}
+.dof-item input{width:15px;height:15px;cursor:pointer}
+/* Load cases */
+.lc-row{background:#f9faff;border:1px solid #e8ebff;border-radius:9px;padding:14px;margin-bottom:12px;position:relative}
+.lc-row .lc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.lc-badge{background:#4361ee;color:white;border-radius:5px;padding:2px 9px;font-size:.76rem;font-weight:600}
+.tag-toggle{display:flex;gap:6px}
+.tag{padding:5px 14px;border-radius:20px;font-size:.8rem;font-weight:500;cursor:pointer;border:1.5px solid #ddd;color:#666;background:white;transition:all .15s}
+.tag.on{border-color:#4361ee;background:#4361ee;color:white}
+.node-mode-tabs{display:flex;gap:8px;margin-bottom:12px}
+.node-tab{padding:5px 14px;border-radius:6px;font-size:.8rem;cursor:pointer;border:1.5px solid #ddd;color:#666;background:white;transition:all .15s}
+.node-tab.on{border-color:#4361ee;background:#f0f3ff;color:#4361ee;font-weight:600}
+/* Analysis results */
+.analysis-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:20px;font-size:.84rem;font-weight:600;margin-bottom:16px}
+.badge-wait{background:#f0f0f0;color:#888}
+.badge-run{background:#fff3e0;color:#e65100}
+.badge-done{background:#f0fff4;color:#1b5e20}
+.badge-err{background:#fff0f0;color:#c62828}
+.result-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.rtab{padding:7px 18px;border-radius:7px;font-size:.84rem;font-weight:600;cursor:pointer;border:1.5px solid #ddd;color:#666;background:white;transition:all .15s}
+.rtab.on{border-color:#4361ee;background:#4361ee;color:white}
+.stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat-card{background:#f8f9ff;border:1px solid #e8ebff;border-radius:10px;padding:12px;text-align:center}
+.stat-val{font-size:1.15rem;font-weight:700;color:#4361ee;font-family:monospace}
+.stat-lbl{font-size:.72rem;color:#888;margin-top:3px}
+.result-chart{width:100%;border-radius:10px;overflow:hidden;margin-bottom:16px}
+.result-table-wrap{max-height:340px;overflow:auto;border:1px solid #e8ebff;border-radius:8px;font-size:.8rem}
+.result-table-wrap table{width:100%;border-collapse:collapse;min-width:700px}
+.result-table-wrap th{background:#4361ee;color:white;padding:8px 10px;position:sticky;top:0;text-align:right;font-size:.76rem}
+.result-table-wrap th:first-child,.result-table-wrap th:nth-child(2){text-align:left}
+.result-table-wrap td{padding:6px 10px;border-bottom:1px solid #f0f0f0;text-align:right;font-family:monospace}
+.result-table-wrap td:first-child,.result-table-wrap td:nth-child(2){text-align:left;font-family:inherit}
+.result-table-wrap tr:hover td{background:#f8f9ff}
+.result-table-wrap .hi-pos{color:#d32f2f;font-weight:700}
+.result-table-wrap .hi-neg{color:#1565c0;font-weight:700}
+.lc-select-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.lc-select-row label{font-size:.82rem;font-weight:600;color:#555;white-space:nowrap}
+.lc-select-row select{flex:1;max-width:260px}
+/* Free Trial button */
+.btn-trial{background:linear-gradient(135deg,#f59e0b,#ef4444);color:white;padding:9px 22px}
+.btn-trial:hover{background:linear-gradient(135deg,#d97706,#dc2626);transform:translateY(-1px)}
+/* Step 9 Hero */
+.trial-hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-radius:16px;padding:52px 32px 44px;text-align:center;margin-bottom:20px;position:relative;overflow:hidden}
+.trial-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(67,97,238,.25) 0%,transparent 60%);pointer-events:none}
+.trial-ball{font-size:4.5rem;margin-bottom:14px;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.trial-headline{font-size:2rem;font-weight:800;color:white;line-height:1.25;margin-bottom:14px;letter-spacing:-.5px}
+.trial-sub{font-size:.95rem;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:32px}
+.btn-trial-cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#ef4444);color:white;padding:16px 44px;border-radius:50px;font-size:1.05rem;font-weight:700;text-decoration:none;transition:all .25s;box-shadow:0 6px 24px rgba(239,68,68,.4)}
+.btn-trial-cta:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(239,68,68,.55)}
+/* Feature cards */
+.trial-features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.tf-card{background:white;border-radius:12px;padding:24px 18px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.07);border-top:4px solid #4361ee;transition:transform .2s}
+.tf-card:hover{transform:translateY(-4px)}
+.tf-icon{font-size:2.4rem;margin-bottom:10px}
+.tf-logo{width:64px;height:64px;object-fit:contain;display:block;margin:0 auto 10px}
+.tf-title{font-size:.95rem;font-weight:700;color:#16213e;margin-bottom:8px}
+.tf-desc{font-size:.8rem;color:#666;line-height:1.7}
+/* Steps row */
+.trial-steps-row{display:flex;align-items:center;justify-content:center;gap:8px;background:white;border-radius:12px;padding:22px 20px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);flex-wrap:wrap}
+.ts-step{text-align:center}
+.ts-num{width:36px;height:36px;border-radius:50%;background:#4361ee;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;margin:0 auto 6px}
+.ts-txt{font-size:.78rem;font-weight:600;color:#333;white-space:nowrap}
+.ts-arrow{font-size:1.2rem;color:#4361ee;font-weight:700;margin:0 4px}
+/* CTA link buttons */
+.trial-links{display:flex;gap:14px;justify-content:center;margin-bottom:10px;flex-wrap:wrap}
+.tl-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:10px;font-size:.92rem;font-weight:700;text-decoration:none;transition:all .2s}
+.tl-primary{background:linear-gradient(135deg,#4361ee,#7c3aed);color:white;box-shadow:0 4px 16px rgba(67,97,238,.35)}
+.tl-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,97,238,.45)}
+.tl-secondary{background:white;color:#4361ee;border:2px solid #4361ee}
+.tl-secondary:hover{background:#f0f3ff;transform:translateY(-2px)}
+/* Intro banner — ad-style 2 panels */
+/* 3-column layout */
+.three-col{display:grid;grid-template-columns:260px 1fr 260px;gap:0;max-width:1460px;margin:0 auto;padding:16px 16px 0;align-items:start;min-width:800px}
+.col-left,.col-right{position:sticky;top:16px;max-height:calc(100vh - 80px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent}
+.col-left{padding-right:12px}
+.col-right{padding-left:12px}
+.col-center{min-width:0;overflow:hidden}
+.col-center .steps{background:white;border-bottom:1px solid #e0e0e0;padding:0 10px;overflow-x:auto;display:flex}
+.col-center .container{max-width:none;margin:16px 0 0;padding:0}
+/* Free trial nudge banner */
+.free-trial-nudge{background:linear-gradient(135deg,#7c3aed,#4361ee);border-radius:12px;padding:16px 16px 14px;margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.ftn-icon{font-size:1.6rem;line-height:1}
+.ftn-title{font-size:.82rem;font-weight:800;color:white;margin-bottom:3px}
+.ftn-desc{font-size:.75rem;color:rgba(255,255,255,.8);line-height:1.6}
+.ftn-btn{display:block;background:white;color:#4361ee;border-radius:8px;padding:10px 14px;font-size:.8rem;font-weight:800;text-align:center;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.ftn-btn:hover{background:#f0f3ff;transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.2)}
+/* Left panel — experience guide */
+.ip-left{background:linear-gradient(145deg,#1a1a2e 0%,#1e2a5e 100%);border-radius:14px;padding:24px 20px 20px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:0}
+.ip-left::before{content:'🔌';position:absolute;right:18px;bottom:14px;font-size:5.5rem;opacity:.08;pointer-events:none;line-height:1}
+.ip-left .ip-eyebrow{font-size:.68rem;font-weight:700;color:#818cf8;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px}
+.ip-left h2{font-size:1.1rem;font-weight:800;color:white;margin-bottom:12px;line-height:1.3}
+.ip-left p{font-size:.82rem;color:rgba(255,255,255,.72);line-height:1.85;margin-bottom:14px}
+.iflow{display:flex;flex-direction:column;gap:5px}
+.iflow-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.iflow-item{background:rgba(99,102,241,.3);border:1px solid rgba(99,102,241,.4);color:#c7d2fe;border-radius:6px;padding:3px 10px;font-size:.73rem;font-weight:600;white-space:nowrap}
+.iflow-sep{color:rgba(255,255,255,.25);font-size:.75rem}
+/* Right panel — World Cup */
+.ip-right{background:linear-gradient(145deg,#0f2027 0%,#1a3a2a 50%,#0f3020 100%);border-radius:14px;padding:24px 20px 20px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.ip-right::before{content:'⚽';position:absolute;right:16px;bottom:12px;font-size:6rem;opacity:.1;pointer-events:none;line-height:1}
+.ip-right .ip-eyebrow{font-size:.68rem;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px}
+.ip-right h2{font-size:1.1rem;font-weight:800;color:white;margin-bottom:16px;line-height:1.3}
+.wc-rows{display:flex;flex-direction:column;gap:8px;flex:1}
+.wc-row{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:10px 14px;display:grid;grid-template-columns:auto 1fr;gap:0 12px;align-items:center}
+.wr-icon{font-size:1.4rem}
+.wr-info .wr-label{font-size:.64rem;color:rgba(255,255,255,.45);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.wr-info .wr-date{font-size:.86rem;color:white;font-weight:700;margin-bottom:1px}
+.wr-info .wr-kst{font-size:.72rem;color:#fbbf24;font-weight:600}
+.wr-info .wr-venue{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:1px}
+.wc-countdown-box{margin-top:12px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);border-radius:9px;padding:10px 14px;text-align:center}
+.wc-countdown-box .cd-label{font-size:.68rem;color:rgba(255,255,255,.5);margin-bottom:4px}
+.wc-countdown-box #countdown-val{font-size:1.1rem;font-weight:800;color:#fbbf24;letter-spacing:.5px;font-variant-numeric:tabular-nums}
+
+.lang-sw{display:flex;gap:5px;margin-left:auto;align-items:center;flex-shrink:0}
+.lang-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.8);border-radius:6px;padding:5px 11px;font-size:.73rem;cursor:pointer;font-family:inherit;transition:all .2s;font-weight:500}
+.lang-btn:hover{background:rgba(255,255,255,.22);color:white}
+.lang-btn.active{background:rgba(255,255,255,.9);color:#1a1a2e;font-weight:700;border-color:transparent}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">⚽</div>
+  <div>
+    <h1 data-i18n="headerH1">Experience the Latest MIDAS API Technology with the 2026 World Cup</h1>
+    <div class="meta" data-i18n-html="headerMeta">Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; V260509</div>
+  </div>
+  <div class="lang-sw">
+    <button class="lang-btn active" id="langKo" onclick="setLang('ko')">한국어</button>
+    <button class="lang-btn" id="langEn" onclick="setLang('en')">English</button>
+    <button class="lang-btn" id="langTc" onclick="setLang('tc')">繁中</button>
+  </div>
+</header>
+
+<div class="three-col">
+  <aside class="col-left">
+<div class="ip-left">
+      <div class="ip-eyebrow" data-i18n="sidebarEyebrow">MIDAS API Experience</div>
+      <h2 data-i18n-html="sidebarH2">What can you experience<br>in this demo?</h2>
+      <p data-i18n-html="sidebarDesc">
+        <strong style="color:#c7d2fe">Leveraging the Open API of MIDAS Gen NX / Civil NX</strong>,<br>
+        generate a soccer ball (truncated icosahedron) structure<br>
+        directly in your browser — from <strong style="color:#c7d2fe">auto-generation → analysis → result visualization</strong><br>
+        step by step.
+      </p>
+      <div class="iflow">
+        <div class="iflow-row">
+          <span class="iflow-item" data-i18n-html="flow1">① Product</span>
+          <span class="iflow-sep">›</span>
+          <span class="iflow-item" data-i18n-html="flow2">② API Connect</span>
+          <span class="iflow-sep">›</span>
+          <span class="iflow-item" data-i18n-html="flow3">③ Parameters</span>
+          <span class="iflow-sep">›</span>
+          <span class="iflow-item" data-i18n-html="flow4">④ Boundary &amp; Loads</span>
+        </div>
+        <div class="iflow-row">
+          <span class="iflow-item" data-i18n-html="flow5">⑤ 3D Preview</span>
+          <span class="iflow-sep">›</span>
+          <span class="iflow-item" data-i18n-html="flow6">⑥ Generate Model</span>
+          <span class="iflow-sep">›</span>
+          <span class="iflow-item" data-i18n-html="flow7">⑦ Run Analysis</span>
+          <span class="iflow-sep">›</span>
+          <span class="iflow-item" data-i18n-html="flow8">⑧ View Results</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Free trial nudge banner -->
+    <div class="free-trial-nudge">
+      <div class="ftn-icon">🔑</div>
+      <div class="ftn-text">
+        <div class="ftn-title" data-i18n="nudgeTitle">No API credentials yet?</div>
+        <div class="ftn-desc" data-i18n="nudgeDesc">Sign up for a free trial now and get your API Key instantly!</div>
+      </div>
+      <a href="https://resource.midasuser.com/en/free-trial" target="_blank" class="ftn-btn">
+        <span data-i18n="nudgeBtn" data-i18n="freeTrialBtn">Free Trial →</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="col-center">
+<div class="steps">
+  <div class="step-item active" id="s1"><div class="step-num">1</div><span data-i18n="step1">Product</span></div>
+  <div class="step-item"        id="s2"><div class="step-num">2</div><span data-i18n="step2">API Connect</span></div>
+  <div class="step-item"        id="s3"><div class="step-num">3</div><span data-i18n="step3">Parameters</span></div>
+  <div class="step-item"        id="s4"><div class="step-num">4</div><span data-i18n="step4">Boundary</span></div>
+  <div class="step-item"        id="s5"><div class="step-num">5</div><span data-i18n="step5">Loads</span></div>
+  <div class="step-item"        id="s6"><div class="step-num">6</div><span data-i18n="step6">3D Preview</span></div>
+  <div class="step-item"        id="s7"><div class="step-num">7</div><span data-i18n="step7">Generate</span></div>
+  <div class="step-item"        id="s8"><div class="step-num">8</div><span data-i18n="step8">Analysis</span></div>
+  <div class="step-item step-trial" id="s9" onclick="goTo(9)"><div class="step-num">9</div><span data-i18n="step9">Free Trial</span></div>
+</div>
+<div class="container">
+
+<!-- ══ STEP 1: Product Selection ══════════════════════════════════════ -->
+<div id="page1">
+  <div class="card">
+    <h2 data-i18n="step1H2">🎯 Select Your Software</h2>
+    <p style="font-size:.85rem;color:#666;margin-bottom:6px" data-i18n="step1Desc">Select the MIDAS software to build your soccer ball structure.</p>
+    <div class="prod-grid">
+      <div class="prod-card" id="prodGen" onclick="selectProduct('gen')">
+        <div class="prod-check">✓</div>
+        <img class="prod-icon" src="data:image/png;base64,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" alt="Gen NX logo">
+        <div class="prod-name">MIDAS Gen NX</div>
+        <div class="prod-desc" data-i18n-html="genNXDesc">Building Structural Analysis<br>Nonlinear &amp; Seismic Design<br>Performance-Based Design</div>
+        <div class="prod-badge" data-i18n="genNXBadge">Building Structure</div>
+      </div>
+      <div class="prod-card" id="prodCivil" onclick="selectProduct('civil')">
+        <div class="prod-check">✓</div>
+        <img class="prod-icon" src="data:image/png;base64,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" alt="Civil NX logo">
+        <div class="prod-name">MIDAS Civil NX</div>
+        <div class="prod-desc" data-i18n-html="civilNXDesc">Bridge &amp; Civil Structural Analysis<br>3D &amp; Construction Stage Analysis<br>Prestressed Concrete Analysis</div>
+        <div class="prod-badge" data-i18n-html="civilNXBadge">Civil &amp; Bridge</div>
+      </div>
+    </div>
+    <div id="prodAlert" class="hidden" style="margin-top:4px"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="confirmProduct()" data-i18n="confirmBtn">Confirm Selection →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STEP 2: API Connection ═══════════════════════════════════════ -->
+<div id="page2" class="hidden">
+  <div class="card">
+    <h2 id="apiTitle">🔗 API Connection</h2>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>MAPI Key</label>
+        <input id="mapiKey" type="password" placeholder="Enter your MAPI Key" data-i18n-placeholder="mapiPlaceholder">
+      </div>
+    </div>
+    <div id="connAlert" class="hidden" style="margin-top:12px"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(1)" data-i18n="backBtn">← Back</button>
+      <button class="btn btn-secondary" onclick="toggleKey()" data-i18n="showHideKey">Show/Hide Key</button>
+      <button class="btn btn-primary"   onclick="testConn()" data-i18n="testConn">Test Connection →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STEP 3: Parameters ══════════════════════════════════════ -->
+<div id="page3" class="hidden">
+  <div class="card">
+    <h2 data-i18n="step3H2">📐 Structure Parameters</h2>
+    <div class="sec-label" data-i18n="secSize">Structure Size</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label data-i18n="lblRadius">Radius (mm)</label>
+        <input id="radius" type="number" value="5000" min="100" max="100000" step="100">
+      </div>
+      <div class="form-group"></div>
+      <div class="form-group"><label data-i18n="lblCx">Center X (mm)</label><input id="cx" type="number" value="0"></div>
+      <div class="form-group"><label data-i18n="lblCy">Center Y (mm)</label><input id="cy" type="number" value="0"></div>
+      <div class="form-group"><label data-i18n="lblCz">Center Z (mm)</label><input id="cz" type="number" value="0"></div>
+    </div>
+    <div class="sec-label" data-i18n="secMaterial">Material (Steel)</div>
+    <div class="form-grid">
+      <div class="form-group"><label data-i18n="lblMatName">Material Name</label><input id="matName" type="text" value="SM400"></div>
+      <div class="form-group"><label data-i18n="lblElast">Elastic Modulus (MPa)</label><input id="elast" type="number" value="205000"></div>
+      <div class="form-group"><label data-i18n="lblPoisn">Poisson's Ratio</label><input id="poisn" type="number" value="0.3" step="0.01"></div>
+      <div class="form-group"><label data-i18n="lblDen">Density (N/mm³)</label><input id="den" type="number" value="7.85e-5" step="any"></div>
+    </div>
+    <div class="sec-label" data-i18n="secSection">Section (Rectangular)</div>
+    <div class="form-grid">
+      <div class="form-group"><label data-i18n="lblSectName">Section Name</label><input id="sectName" type="text" value="Rect-150x150"></div>
+      <div class="form-group"></div>
+      <div class="form-group"><label data-i18n="lblSectH">Height H (mm)</label><input id="sectH" type="number" value="150" min="10"></div>
+      <div class="form-group"><label data-i18n="lblSectB">Width B (mm)</label><input id="sectB" type="number" value="150" min="10"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(2)" data-i18n="backBtn">← Back</button>
+      <button class="btn btn-primary"   onclick="goTo(4)" data-i18n="nextBtn">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STEP 4: Boundary Conditions ══════════════════════════════════════ -->
+<div id="page4" class="hidden">
+  <div class="card">
+    <h2 data-i18n="step4H2">🔒 Boundary Conditions (Supports)</h2>
+    <div class="sec-label" data-i18n="secSupNode">Support Node Selection</div>
+    <div class="node-mode-tabs">
+      <div class="node-tab on" id="nodeTab1" onclick="setNodeMode('auto')" data-i18n="nodeAuto">Auto (Bottom nodes)</div>
+      <div class="node-tab"   id="nodeTab2" onclick="setNodeMode('manual')" data-i18n="nodeManual">Manual (direct input)</div>
+    </div>
+    <div id="nodeAutoInfo" style="font-size:.82rem;color:#666;background:#f8f9ff;border-radius:7px;padding:10px 12px">
+      <span data-i18n-html="nodeAutoDesc">Automatically selects the <strong>lowest nodes</strong> based on radius and center Z.</span>
+    </div>
+    <div id="nodeManualInput" class="hidden">
+      <div class="form-group" style="margin-top:6px">
+        <label data-i18n="lblManualNodes">Node numbers (comma-separated, e.g. 1,5,9)</label>
+        <input id="manualNodes" type="text" placeholder="1, 5, 9, 13">
+      </div>
+    </div>
+    <div class="sec-label" style="margin-top:18px" data-i18n="secSupType">Support Type</div>
+    <div class="support-types">
+      <div class="sup-card selected" id="supFix"  onclick="setSup('fix')">
+        <div class="sicon">⬛</div><div class="sname" data-i18n="supFixName">Fixed</div><div class="sdesc">Dx Dy Dz Rx Ry Rz</div>
+      </div>
+      <div class="sup-card" id="supPin"  onclick="setSup('pin')">
+        <div class="sicon">🔺</div><div class="sname" data-i18n="supPinName">Hinge (Pin)</div><div class="sdesc">Dx Dy Dz</div>
+      </div>
+      <div class="sup-card" id="supRolZ" onclick="setSup('rolz')">
+        <div class="sicon">⭕</div><div class="sname" data-i18n="supRolName">Roller (Z)</div><div class="sdesc">Dz</div>
+      </div>
+      <div class="sup-card" id="supCust" onclick="setSup('custom')">
+        <div class="sicon">⚙️</div><div class="sname" data-i18n="supCustName">Custom</div><div class="sdesc" data-i18n="supCustDesc">Select DOFs</div>
+      </div>
+    </div>
+    <div id="dofPanel" class="hidden">
+      <div style="font-size:.8rem;color:#666;margin-bottom:6px" data-i18n="selectDOF">Select DOFs to restrain</div>
+      <div class="dof-grid">
+        <label class="dof-item"><input type="checkbox" id="dDx" data-i18n="dofDx"> Dx (X Translation)</label>
+        <label class="dof-item"><input type="checkbox" id="dDy" data-i18n="dofDy"> Dy (Y Translation)</label>
+        <label class="dof-item"><input type="checkbox" id="dDz" data-i18n="dofDz"> Dz (Z Translation)</label>
+        <label class="dof-item"><input type="checkbox" id="dRx" data-i18n="dofRx"> Rx (X Rotation)</label>
+        <label class="dof-item"><input type="checkbox" id="dRy" data-i18n="dofRy"> Ry (Y Rotation)</label>
+        <label class="dof-item"><input type="checkbox" id="dRz" data-i18n="dofRz"> Rz (Z Rotation)</label>
+      </div>
+    </div>
+    <div id="supPreview" style="font-size:.82rem;color:#555;margin-top:12px;background:#f8f9ff;border-radius:7px;padding:10px 12px"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(3)" data-i18n="backBtn">← Back</button>
+      <button class="btn btn-primary"   onclick="goTo(5)" data-i18n="nextBtn">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STEP 5: Load Settings ══════════════════════════════════════ -->
+<div id="page5" class="hidden">
+  <div class="card">
+    <h2 data-i18n="step5H2">⬇️ Load Settings</h2>
+    <div id="lcList"></div>
+    <button class="btn btn-secondary" onclick="addLC()" style="margin-top:4px" data-i18n="addLCBtn">+ Add Load Case</button>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(4)" data-i18n="backBtn">← Back</button>
+      <button class="btn btn-primary"   onclick="goTo(6)" data-i18n="previewBtn">Preview →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STEP 6: 3D Preview ════════════════════════════════════════ -->
+<div id="page6" class="hidden">
+  <div class="card">
+    <h2 data-i18n="step6H2">🔍 3D Preview</h2>
+    <div class="metrics">
+      <div class="metric"><div class="metric-val">60</div><div class="metric-lbl" data-i18n="metricNodes">Nodes</div></div>
+      <div class="metric"><div class="metric-val">90</div><div class="metric-lbl" data-i18n="metricBeams">Beam Elements</div></div>
+      <div class="metric"><div class="metric-val" id="radiusLabel">5,000</div><div class="metric-lbl" data-i18n="metricRadius">Radius (mm)</div></div>
+    </div>
+    <div id="plot"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(5)" data-i18n="backBtn">← Back</button>
+      <button class="btn btn-success"   onclick="goTo(7)" data-i18n="genModelBtn">Generate Model →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STEP 7: Generate Model ══════════════════════════════════════ -->
+<div id="page7" class="hidden">
+  <div class="card">
+    <h2 id="genPageTitle" data-i18n="step7H2">🚀 Generate Model</h2>
+    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:18px">
+      <input type="checkbox" id="clearModel" checked style="width:15px;height:15px">
+      <span style="font-size:.88rem" data-i18n="clearLabel">Clears existing nodes / elements / materials / sections / boundary conditions / loads</span>
+    </label>
+    <button class="btn btn-success" id="genBtn" onclick="generate()" style="width:100%;padding:13px;font-size:.98rem" data-i18n="genBtnLbl">⚽ Start Generating Soccer Ball
+    </button>
+    <div class="progress-wrap hidden" id="progressWrap">
+      <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="progress-label"  id="progressLabel"></div>
+    </div>
+    <div class="log-box" id="logBox" style="margin-top:14px" data-initial="1">
+      <span style="color:#f8c94f">▶ Press the Generate button to start.</span>
+    </div>
+    <div class="notice hidden" id="fitNotice">
+      <div style="font-size:1.3rem;flex-shrink:0">💡</div>
+      <div>
+        <div id="noticeTitle" style="font-size:.88rem;font-weight:600;color:#795548;margin-bottom:8px" data-i18n="noticeTitle">Screen not updated?</div>
+        <div class="hint-cards">
+          <div class="hint-card"><div class="icon">⌨️</div><div class="title" data-i18n="hintShortcutTitle">Shortcut</div><div class="desc" data-i18n-html="hintShortcutDesc"><code>Ctrl + A</code><br>Select All → Refresh view</div></div>
+          <div class="hint-card"><div class="icon">🖱️</div><div class="title" data-i18n="hintMouseTitle">Mouse</div><div class="desc" data-i18n-html="hintMouseDesc">In viewport:<br>Scroll or drag</div></div>
+          <div class="hint-card"><div class="icon">📋</div><div class="title" data-i18n="hintMenuTitle">Menu</div><div class="desc" data-i18n-html="hintMenuDesc">View → Fit All</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top:18px">
+      <button class="btn btn-secondary" onclick="goTo(6)" data-i18n="backBtn">← Back</button>
+      <button class="btn btn-primary"   id="toAnalBtn" onclick="goTo(8)" disabled data-i18n="toAnalBtnLbl">Run Analysis →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STEP 8: Analysis & Results ════════════════════════════════════ -->
+<div id="page8" class="hidden">
+
+  <!-- Analysis execution card -->
+  <div class="card">
+    <h2 data-i18n="step8H2anal">⚡ Run Analysis</h2>
+    <div id="analysisBadge" class="analysis-badge badge-wait" data-i18n="badgeWait">⏸ Waiting</div>
+    <button class="btn btn-analyze" id="runAnalBtn" onclick="runAnalysis()" data-i18n="runAnalBtnLbl">🔬 Start Analysis</button>
+    <div class="log-box" id="analysisLog" style="margin-top:14px" data-initial="1">
+      <span style="color:#f8c94f">▶ Click the Analyze button to start. (Model must be generated first)</span>
+    </div>
+  </div>
+
+  <!-- Results card (shown after analysis) -->
+  <div class="card hidden" id="resultCard">
+    <h2 data-i18n="step8H2result">📊 Analysis Results</h2>
+
+    <div class="result-tabs">
+      <div class="rtab on" id="rtab-react"   onclick="showResultTab('react')" data-i18n="tabReact">Reactions</div>
+      <div class="rtab"    id="rtab-disp"    onclick="showResultTab('disp')" data-i18n="tabDisp">Displacement</div>
+      <div class="rtab"    id="rtab-member"  onclick="showResultTab('member')" data-i18n="tabMember">Internal Forces</div>
+      <div class="rtab"    id="rtab-shear"   onclick="showResultTab('shear')" data-i18n="tabShear">Shear Force</div>
+      <div class="rtab"    id="rtab-moment"  onclick="showResultTab('moment')" data-i18n="tabMoment">Bending Moment</div>
+      <div class="rtab"    id="rtab-torsion" onclick="showResultTab('torsion')" data-i18n="tabTorsion">Torsional Moment</div>
+      <div class="rtab"    id="rtab-stress"  onclick="showResultTab('stress')" data-i18n="tabStress">Stress Ratio / DCR</div>
+    </div>
+
+    <div class="lc-select-row">
+      <label data-i18n="lblLoadCase">Load Case</label>
+      <select id="resultLC" onchange="refreshResultDisplay()"></select>
+    </div>
+
+    <!-- Reaction panel -->
+    <div id="panel-react">
+      <div class="stat-cards" id="statReact"></div>
+      <div class="result-chart" id="chart-react" style="height:320px"></div>
+      <div class="result-table-wrap"><table id="table-react"></table></div>
+    </div>
+
+    <!-- Displacement panel -->
+    <div id="panel-disp" class="hidden">
+      <div class="stat-cards" id="statDisp"></div>
+      <div class="result-chart" id="chart-disp" style="height:320px"></div>
+      <div class="result-table-wrap"><table id="table-disp"></table></div>
+    </div>
+
+    <!-- Internal force panel -->
+    <div id="panel-member" class="hidden">
+      <div class="stat-cards" id="statMember"></div>
+      <div class="result-chart" id="chart-member" style="height:320px"></div>
+      <div class="result-table-wrap"><table id="table-member"></table></div>
+    </div>
+
+    <!-- Shear force panel -->
+    <div id="panel-shear" class="hidden">
+      <div class="stat-cards" id="statShear"></div>
+      <div class="result-chart" id="chart-shear" style="height:320px"></div>
+      <div class="result-table-wrap"><table id="table-shear"></table></div>
+    </div>
+
+    <!-- Bending moment panel -->
+    <div id="panel-moment" class="hidden">
+      <div class="stat-cards" id="statMoment"></div>
+      <div class="result-chart" id="chart-moment" style="height:320px"></div>
+      <div class="result-table-wrap"><table id="table-moment"></table></div>
+    </div>
+
+    <!-- Torsion panel -->
+    <div id="panel-torsion" class="hidden">
+      <div class="stat-cards" id="statTorsion"></div>
+      <div class="result-chart" id="chart-torsion" style="height:320px"></div>
+      <div class="result-table-wrap"><table id="table-torsion"></table></div>
+    </div>
+
+    <!-- Stress ratio panel -->
+    <div id="panel-stress" class="hidden">
+      <div class="stat-cards" id="statStress"></div>
+      <div class="result-chart" id="chart-stress" style="height:320px"></div>
+      <div class="result-table-wrap"><table id="table-stress"></table></div>
+    </div>
+  </div>
+
+  <div class="btn-row" style="margin-top:4px">
+    <button class="btn btn-secondary" onclick="goTo(7)" data-i18n="backBtn">← Back</button>
+    <button class="btn btn-secondary" onclick="resetAll()" data-i18n="startOverBtn">🔄 Start Over</button>
+    <button class="btn btn-trial" onclick="goTo(9)" data-i18n="freeTrialBtn">Free Trial →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 9: Free Trial ════════════════════════════════════ -->
+<div id="page9" class="hidden">
+  <div class="trial-hero">
+    <div class="trial-ball">⚽</div>
+    <div class="trial-headline" data-i18n-html="step9Headline">Try MIDAS for Free<br>Right Now!</div>
+    <div class="trial-sub" data-i18n-html="step9Sub">Just like the soccer ball structure you just created and analyzed,<br>turn your ideas into reality with MIDAS Gen NX · Civil NX.</div>
+    <a href="https://resource.midasuser.com/en/free-trial" target="_blank" class="btn-trial-cta">
+      <span data-i18n="step9CTA">Apply for Free Trial →</span>
+    </a>
+  </div>
+
+  <div class="trial-features">
+    <div class="tf-card">
+      <img id="tf-img-gen" class="tf-logo" src="" alt="Gen NX">
+      <div class="tf-title">MIDAS Gen NX</div>
+      <div class="tf-desc" data-i18n-html="tf1Desc">Structural analysis for buildings<br>Nonlinear · Seismic · Performance-based design<br>API-driven automation workflow</div>
+    </div>
+    <div class="tf-card">
+      <img id="tf-img-civil" class="tf-logo" src="" alt="Civil NX">
+      <div class="tf-title">MIDAS Civil NX</div>
+      <div class="tf-desc" data-i18n-html="tf2Desc">Bridge &amp; civil structure analysis<br>3D · Construction stage · PSC analysis<br>API-driven automation workflow</div>
+    </div>
+    <div class="tf-card">
+      <div class="tf-icon">🔌</div>
+      <div class="tf-title">Open API</div>
+      <div class="tf-desc" data-i18n-html="tf3Desc">From model creation via REST API<br>to analysis &amp; result extraction —<br>fully automatable</div>
+    </div>
+  </div>
+
+  <div class="trial-steps-row">
+    <div class="ts-step"><div class="ts-num">1</div><div class="ts-txt" data-i18n="tsStep1">Apply for Free Trial</div></div>
+    <div class="ts-arrow">→</div>
+    <div class="ts-step"><div class="ts-num">2</div><div class="ts-txt" data-i18n="tsStep2">Email Verification</div></div>
+    <div class="ts-arrow">→</div>
+    <div class="ts-step"><div class="ts-num">3</div><div class="ts-txt" data-i18n="tsStep3">Download Software</div></div>
+    <div class="ts-arrow">→</div>
+    <div class="ts-step"><div class="ts-num">4</div><div class="ts-txt" data-i18n="tsStep4">Start Using Immediately</div></div>
+  </div>
+
+  <div class="trial-links">
+    <a href="https://resource.midasuser.com/en/free-trial" target="_blank" class="tl-btn tl-primary">
+      <span data-i18n="tlBtn1">🎁 Apply for Free Trial</span>
+    </a>
+    <a href="https://www.midasuser.com" target="_blank" class="tl-btn tl-secondary">
+      <span data-i18n="tlBtn2">🌐 MIDAS Official Website</span>
+    </a>
+  </div>
+
+  <div class="btn-row" style="margin-top:24px" id="page9Btns"></div>
+</div>
+
+</div><!-- /container -->
+  </div><!-- /col-center -->
+
+  <aside class="col-right">
+    <div class="ip-right">
+      <div class="ip-eyebrow" data-i18n="wcEyebrow">FIFA World Cup 2026 · North America</div>
+      <h2 data-i18n-html="wcH2">🏆 Opening Ceremony &amp; First Match</h2>
+      <div class="wc-rows">
+        <div class="wc-row">
+          <div class="wr-icon">🎉</div>
+          <div class="wr-info">
+            <div class="wr-label" data-i18n="wcLabel1">Opening Ceremony</div>
+            <div class="wr-date" data-i18n="wcDate1">June 11, 2026 (Thu)</div>
+            <div class="wr-kst" data-i18n="wcKst1">KST: Jun 12 (Fri) early morning</div>
+            <div class="wr-venue" data-i18n="wcVenue">MetLife Stadium, East Rutherford, NJ, USA</div>
+          </div>
+        </div>
+        <div class="wc-row">
+          <div class="wr-icon">⚽</div>
+          <div class="wr-info">
+            <div class="wr-label" data-i18n="wcLabel2">Opening Match</div>
+            <div class="wr-date" data-i18n="wcDate2">Jun 12, 2026 (Fri) 09:00 KST</div>
+            <div class="wr-kst" data-i18n="wcKst2">Local: Jun 11 (Thu) 20:00 ET</div>
+            <div class="wr-venue" data-i18n="wcVenue">MetLife Stadium, East Rutherford, NJ, USA</div>
+          </div>
+        </div>
+      </div>
+      <div class="wc-countdown-box">
+        <div class="cd-label" data-i18n="cdLabel">⏱ Time Until Kickoff (KST)</div>
+        <div id="countdown-val" data-i18n="cdInit">Calculating...</div>
+      </div>
+    </div>
+  </aside>
+</div><!-- /three-col -->
+
+<script>
+
+// ════════════════════════════════════════════════════════════════
+// MULTILINGUAL SUPPORT — KO / EN / TC
+// ════════════════════════════════════════════════════════════════
+const STRINGS = {
+ko:{
+  pageTitle:'북중미 월드컵과 함께하는 MIDAS API 최신 기술 체험하기',
+  headerH1:'북중미 월드컵과 함께하는 MIDAS API 최신 기술 체험하기',
+  headerMeta:'절단 정이십면체(축구공) 구조물 자동 생성 &nbsp;·&nbsp; 개발자: Dennis &nbsp;·&nbsp; V260509',
+  step1:'제품 선택',step2:'API 연결',step3:'파라미터',step4:'경계 조건',step5:'하중',
+  step6:'3D 미리보기',step7:'모델 생성',step8:'해석',step9:'무료체험신청',
+  sidebarEyebrow:'MIDAS API Experience',
+  sidebarH2:'이 체험에서<br>무엇을 할 수 있나요?',
+  sidebarDesc:'<strong style="color:#c7d2fe">MIDAS Gen NX / Civil NX의 Open API</strong>를 활용해,<br>브라우저에서 직접 축구공(절단 정이십면체) 구조물을 생성 —<br><strong style="color:#c7d2fe">자동 생성 → 해석 → 결과 시각화</strong>까지<br>단계별로 체험합니다.',
+  flow1:'① 제품 선택',flow2:'② API 연결',flow3:'③ 파라미터',flow4:'④ 경계&amp;하중',
+  flow5:'⑤ 3D 미리보기',flow6:'⑥ 모델 생성',flow7:'⑦ 해석 실행',flow8:'⑧ 결과 확인',
+  nudgeTitle:'API 연결 정보가 없다구요?',
+  nudgeDesc:'지금 바로 무료체험판을 신청하고 API Key를 받아보세요!',
+  nudgeBtn:'무료체험신청 →',
+  wcEyebrow:'FIFA World Cup 2026 · 북중미',
+  wcH2:'🏆 개막식 &amp; 첫 경기 일정',
+  wcLabel1:'개막식 Opening Ceremony',wcDate1:'2026년 6월 12일 (금)',
+  wcKst1:'KST: 6월 12일 (금) 09:00',wcVenue:'MetLife Stadium, 미국 뉴저지 East Rutherford',
+  wcLabel2:'개막전 첫 경기',wcDate2:'2026년 6월 12일 (금) 09:00 KST',
+  wcKst2:'현지: 6월 11일 (목) 20:00 ET',
+  cdLabel:'⏱ 개막까지 남은 시간 (KST 기준)',cdInit:'계산 중...',cdKickoff:'개막!🎉',
+  step1H2:'🎯 제품 선택',step1Desc:'축구공 구조물을 생성할 MIDAS 소프트웨어를 선택하세요.',
+  genNXDesc:'건축 구조 전문 해석 소프트웨어<br>비선형 · 내진 · 성능 기반 설계<br>API 기반 자동화 워크플로우',
+  genNXBadge:'건축 구조',
+  civilNXDesc:'교량 · 토목 구조 해석 소프트웨어<br>3차원 · 시공 단계 · PSC 해석<br>API 기반 자동화 워크플로우',
+  civilNXBadge:'교량・토목',
+  confirmBtn:'확인 →',selectFirst:'먼저 소프트웨어를 선택하세요.',
+  step2H2Suffix:'API 연결 정보',mapiPlaceholder:'MAPI Key를 입력하세요',
+  showHideKey:'키 보기/숨기기',testConn:'연결 테스트 →',backBtn:'← 이전',
+  enterBothAlert:'MAPI Key를 입력하세요.',testingConn:'연결 테스트 중...',
+  connSuccess:'✅ 연결 성공! 다음 단계로 이동합니다.',
+  connFail:'❌ 연결 실패 (HTTP {status}). URL과 Key를 확인하세요.',
+  connError:'❌ 연결 오류: {msg}',
+  step3H2:'📐 구조물 파라미터',secSize:'구조물 크기',lblRadius:'반경 (mm)',
+  lblCx:'중심 X (mm)',lblCy:'중심 Y (mm)',lblCz:'중심 Z (mm)',
+  secMaterial:'재료 (강재)',lblMatName:'재료명',lblElast:'탄성계수 (MPa)',
+  lblPoisn:'포아송 비',lblDen:'밀도 (N/mm³)',
+  secSection:'단면 (직사각형)',lblSectName:'단면명',lblSectH:'높이 H (mm)',lblSectB:'너비 B (mm)',
+  nextBtn:'다음 →',
+  step4H2:'🔒 경계 조건 (지지)',secSupNode:'지지 절점 선택',
+  nodeAuto:'자동 (최하단 절점)',nodeManual:'수동 (직접 입력)',
+  nodeAutoDesc:'반경·중심 Z 기준으로 <strong>가장 아래 위치한 절점들</strong>을 자동으로 선택합니다.',
+  lblManualNodes:'절점 번호 (쉼표로 구분, 예: 1,5,9)',secSupType:'지지 타입',
+  supFixName:'고정단',supPinName:'힌지 (핀)',supRolName:'롤러 (Z)',supCustName:'사용자 정의',
+  supCustDesc:'DOF 직접 선택',selectDOF:'구속할 DOF를 선택하세요',
+  dofDx:'Dx (X 이동)',dofDy:'Dy (Y 이동)',dofDz:'Dz (Z 이동)',
+  dofRx:'Rx (X 회전)',dofRy:'Ry (Y 회전)',dofRz:'Rz (Z 회전)',
+  step5H2:'⬇️ 하중 설정',addLCBtn:'+ 하중 케이스 추가',previewBtn:'미리보기 →',
+  lcBadgeLabel:'하중 케이스',deleteBtn:'삭제',lblLCName:'<label>하중 케이스명</label>',
+  lblLCType:'<label>하중 분류</label>',
+  lcOptUser:'USER (사용자 정의)',lcOptD:'D (고정하중)',lcOptL:'L (활하중)',
+  lcOptW:'W (풍하중)',lcOptE:'E (지진하중)',lcLoadKind:'하중 종류',
+  tagSW:'자중 (Self-weight)',tagNL:'절점 하중 (Nodal)',
+  lblDirection:'<label>방향</label>',swDirZ:'-Z (중력 방향)',
+  lblScale:'<label>계수</label>',nlAll:'전체 절점',nlBottom:'최하단 절점',nlManual:'직접 입력',
+  lblNLNodes:'<label style="font-size:.79rem;color:#666">절점 번호 (쉼표 구분)</label>',
+  step6H2:'🔍 3D 미리보기',metricNodes:'절점',metricBeams:'보 요소',metricRadius:'반경 (mm)',
+  genModelBtn:'모델 생성 →',
+  step7H2:'🚀 모델 생성',step7Suffix:'모델 생성',
+  clearLabel:'기존 절점 / 요소 / 재료 / 단면 / 경계조건 / 하중 초기화 후 생성',
+  genBtnLbl:'⚽ 축구공 생성 시작',
+  logInit:'▶ 생성 버튼을 눌러 시작하세요.',
+  noticeTitle:'화면이 업데이트되지 않았다면?',
+  hintShortcutTitle:'단축키',hintShortcutDesc:'<code>Ctrl + A</code><br>전체 선택 → 뷰 갱신',
+  hintMouseTitle:'마우스',hintMouseDesc:'뷰포트에서<br>스크롤 or 드래그',
+  hintMenuTitle:'메뉴',hintMenuDesc:'View → Fit All<br>(전체 보기)',
+  toAnalBtnLbl:'해석 실행 →',
+  traceName3dEdge:'요소 (90)',traceName3dNode:'절점 (60)',
+  traceSup:'지지 절점 ({n})',traceLoad:'하중 절점 ({n})',
+  step8H2anal:'⚡ 해석 실행',step8H2result:'📊 해석 결과',
+  badgeWait:'⏸ 해석 대기 중',badgeRun:'🔄 해석 실행 중...',badgeDone:'✅ 해석 완료',badgeErr:'❌ 해석 오류',
+  runAnalBtnLbl:'🔬 해석 시작',
+  alogInit:'▶ 해석 버튼을 눌러 분석을 시작하세요. (모델이 먼저 생성되어 있어야 합니다)',
+  lblLoadCase:'하중 케이스',
+  tabReact:'반력 (Reactions)',tabDisp:'변위 (Displacement)',tabMember:'부재력 (Internal Forces)',
+  tabShear:'전단력 (Shear Force)',tabMoment:'휨모멘트 (Bending Moment)',
+  tabTorsion:'비틀림 (Torsional Moment)',tabStress:'응력비 (Stress Ratio / DCR)',
+  startOverBtn:'🔄 처음부터',freeTrialBtn:'무료체험신청 →',
+  logInit5:'초기화 중...',logCleared:'기존 데이터 초기화 완료',logMat15:'재료 생성 중...',
+  logMatFail:'재료 실패: {msg}',logMatOk:'재료: {name}',logSect25:'단면 생성 중...',
+  logSectFail:'단면 실패: {msg}',logSectOk:'단면: {name} ({h}×{b} mm)',
+  logNode38:'절점 생성 중...',logNodeFail:'절점 실패: {msg}',logNodeOk:'절점 {n}개 생성',
+  logElem52:'요소 생성 중...',logElemFail:'요소 실패: {msg}',logElemOk:'보 요소 {n}개 생성',
+  logBC65:'경계 조건 생성 중...',logBCFail:'경계조건 실패: {msg}',
+  logBCOk:'경계 조건 {n}개 절점 ({label})',logBCNone:'경계 조건: 없음',
+  logLoad78:'하중 생성 중...',logLC:'하중 케이스: [{type}] {name}',
+  logSWFail:'자중 실패: {msg}',logSWOk:'  자중 ({dir} × {val})',
+  logNLFail:'절점 하중 실패: {msg}',logNLOk:'  절점 하중 {n}개 절점 (Fz={fz} N)',
+  logNLNone:'  절점 하중: 대상 없음',logDone:'완료!',
+  logModelOk:'🎉 {name} 모델 생성 완료!',logError:'오류: {msg}',
+  alogUnits:'단위 설정 중 (N, MM)...',alogUnitsOk:'단위 설정 완료',
+  alogRunning:'해석 실행 중... (완료 시까지 대기)',analFailed:'해석 실패',alogDone:'해석 완료',
+  alogFetchLC:'결과 조회 중 ({n}개 하중 케이스)...',
+  alogReact:'반력 조회 중...',alogReactOk:'반력: {n}행',alogReactNone:'반력 데이터 없음',
+  alogDisp:'변위 조회 중...',alogDispOk:'변위: {n}행',alogDispNone:'변위 데이터 없음',
+  alogForce:'부재력 (BEAMFORCE) 조회 중...',alogForceOk:'부재력: {n}행',alogForceNone:'부재력 데이터 없음',
+  alogStress:'응력비 (BEAMSTRESS) 조회 중...',alogStressOk:'응력비: {n}행',
+  alogStressNone:'응력비 데이터 없음 (설계 미수행 시 정상)',
+  alogStressSkip:'응력비 조회 생략 ({msg})',alogAllDone:'🎉 해석 및 결과 조회 완료!',
+  alogError:'오류: {msg}',
+  statSupNodeCount:'지지 절점 수',chartReact:'반력 Fz (N) - 지지 절점별',xaxisNode:'절점 번호',
+  statMaxDisp:'Max 합성변위 (mm)',chartDisp:'Dz 변위 Top 20 (mm)',
+  statMemberCount:'부재 수',chartAxial:'부재력 Fx Top 20 (N)',xaxisElem:'요소 번호',
+  statMaxShear:'Max 전단합 (N)',chartShear:'전단력 Top 20 (|Fy| 기준)',yaxisShear:'전단 (N)',
+  chartMoment:'휨모멘트 Top 20 (|Mz| 기준)',yaxisMoment:'모멘트 (N·mm)',
+  noTorsion:'비틀림 데이터(Mx) 없음',chartTorsion:'비틀림 Mx Top 20 (N·mm)',
+  noStress:'응력비 데이터 없음 (설계 체크 미수행 또는 API 미지원)',
+  statMaxStress:'Max 응력비',statAvgStress:'평균 응력비',
+  statOverStress:'초과 부재 (>1.0)',statTotalMember:'총 부재 수',
+  stressName:'응력비',chartStress:'응력비 Top 20',yaxisStress:'응력비',
+  supFixLabel:'고정단 (Dx Dy Dz Rx Ry Rz)',supPinLabel:'힌지 (Dx Dy Dz)',
+  supRolLabel:'롤러-Z (Dz)',supCustLabel:'사용자 정의: ',
+  sumSupLabel:'<b>지지 조건:</b> ',sumNodeAuto:'최하단 절점 자동 선택',sumNodeManual:'수동 입력 ─ ',
+  sumNodeLabel:'<b>절점 선택:</b> ',
+  step9Headline:'지금 바로 MIDAS를<br>무료로 체험해 보세요!',
+  step9Sub:'방금 직접 생성하고 해석한 축구공 구조물처럼,<br>MIDAS Gen NX · Civil NX로 당신의 아이디어를 현실로 만드세요.',
+  step9CTA:'무료체험 신청하기 →',
+  tf1Desc:'건축 구조 전문 해석 소프트웨어<br>비선형 · 내진 · 성능 기반 설계<br>API 기반 자동화 워크플로우',
+  tf2Desc:'교량 · 토목 구조 해석 소프트웨어<br>3차원 · 시공 단계 · PSC 해석<br>API 기반 자동화 워크플로우',
+  tf3Desc:'REST API로 모델 생성부터<br>해석 실행 · 결과 추출까지<br>완전 자동화 가능',
+  tsStep1:'무료체험 신청',tsStep2:'이메일 인증',tsStep3:'소프트웨어 다운로드',tsStep4:'즉시 사용 시작',
+  tlBtn1:'🎁 무료 체험 신청 (Free Trial)',tlBtn2:'🌐 MIDAS 공식 홈페이지',
+  step9BackBtn:'← 이전',
+},
+en:{
+  pageTitle:'Experience the Latest MIDAS API Technology with the 2026 World Cup',
+  headerH1:'Experience the Latest MIDAS API Technology with the 2026 World Cup',
+  headerMeta:'Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; V260509',
+  step1:'Product',step2:'API Connect',step3:'Parameters',step4:'Boundary',step5:'Loads',
+  step6:'3D Preview',step7:'Generate',step8:'Analysis',step9:'Free Trial',
+  sidebarEyebrow:'MIDAS API Experience',
+  sidebarH2:'What can you experience<br>in this demo?',
+  sidebarDesc:'<strong style="color:#c7d2fe">Leveraging the Open API of MIDAS Gen NX / Civil NX</strong>,<br>generate a soccer ball (truncated icosahedron) structure<br>directly in your browser — from <strong style="color:#c7d2fe">auto-generation → analysis → result visualization</strong><br>step by step.',
+  flow1:'① Product',flow2:'② API Connect',flow3:'③ Parameters',flow4:'④ Boundary &amp; Loads',
+  flow5:'⑤ 3D Preview',flow6:'⑥ Generate Model',flow7:'⑦ Run Analysis',flow8:'⑧ View Results',
+  nudgeTitle:'No API credentials yet?',
+  nudgeDesc:'Sign up for a free trial now and get your API Key instantly!',
+  nudgeBtn:'Free Trial →',
+  wcEyebrow:'FIFA World Cup 2026 · North America',
+  wcH2:'🏆 Opening Ceremony &amp; First Match',
+  wcLabel1:'Opening Ceremony',wcDate1:'June 11, 2026 (Thu)',
+  wcKst1:'KST: Jun 12 (Fri) early morning',wcVenue:'MetLife Stadium, East Rutherford, NJ, USA',
+  wcLabel2:'Opening Match',wcDate2:'Jun 12, 2026 (Fri) 09:00 KST',
+  wcKst2:'Local: Jun 11 (Thu) 20:00 ET',
+  cdLabel:'⏱ Time Until Kickoff (KST)',cdInit:'Calculating...',cdKickoff:'KICKOFF!🎉',
+  step1H2:'🎯 Select Your Software',step1Desc:'Select the MIDAS software to build your soccer ball structure.',
+  genNXDesc:'Building Structural Analysis<br>Nonlinear &amp; Seismic Design<br>Performance-Based Design',
+  genNXBadge:'Building Structure',
+  civilNXDesc:'Bridge &amp; Civil Structural Analysis<br>3D &amp; Construction Stage Analysis<br>Prestressed Concrete Analysis',
+  civilNXBadge:'Civil &amp; Bridge',
+  confirmBtn:'Confirm Selection →',selectFirst:'Please select a software first.',
+  step2H2Suffix:'API Connection',mapiPlaceholder:'Enter your MAPI Key',
+  showHideKey:'Show/Hide Key',testConn:'Test Connection →',backBtn:'← Back',
+  enterBothAlert:'Please enter your MAPI Key.',testingConn:'Testing connection...',
+  connSuccess:'✅ Connection successful! Proceeding to next step.',
+  connFail:'❌ Connection failed (HTTP {status}). Please check your URL and Key.',
+  connError:'❌ Connection error: {msg}',
+  step3H2:'📐 Structure Parameters',secSize:'Structure Size',lblRadius:'Radius (mm)',
+  lblCx:'Center X (mm)',lblCy:'Center Y (mm)',lblCz:'Center Z (mm)',
+  secMaterial:'Material (Steel)',lblMatName:'Material Name',lblElast:'Elastic Modulus (MPa)',
+  lblPoisn:"Poisson's Ratio",lblDen:'Density (N/mm³)',
+  secSection:'Section (Rectangular)',lblSectName:'Section Name',lblSectH:'Height H (mm)',lblSectB:'Width B (mm)',
+  nextBtn:'Next →',
+  step4H2:'🔒 Boundary Conditions (Supports)',secSupNode:'Support Node Selection',
+  nodeAuto:'Auto (Bottom nodes)',nodeManual:'Manual (direct input)',
+  nodeAutoDesc:'Automatically selects the <strong>lowest nodes</strong> based on radius and center Z.',
+  lblManualNodes:'Node numbers (comma-separated, e.g. 1,5,9)',secSupType:'Support Type',
+  supFixName:'Fixed',supPinName:'Hinge (Pin)',supRolName:'Roller (Z)',supCustName:'Custom',
+  supCustDesc:'Select DOFs',selectDOF:'Select DOFs to restrain',
+  dofDx:'Dx (X Translation)',dofDy:'Dy (Y Translation)',dofDz:'Dz (Z Translation)',
+  dofRx:'Rx (X Rotation)',dofRy:'Ry (Y Rotation)',dofRz:'Rz (Z Rotation)',
+  step5H2:'⬇️ Load Settings',addLCBtn:'+ Add Load Case',previewBtn:'Preview →',
+  lcBadgeLabel:'Load Case',deleteBtn:'Delete',
+  lblLCName:'<label>Load Case Name</label>',lblLCType:'<label>Load Type</label>',
+  lcOptUser:'USER (User defined)',lcOptD:'D (Dead load)',lcOptL:'L (Live load)',
+  lcOptW:'W (Wind load)',lcOptE:'E (Seismic load)',lcLoadKind:'Load type',
+  tagSW:'Self-weight',tagNL:'Nodal load',
+  lblDirection:'<label>Direction</label>',swDirZ:'-Z (Gravity)',
+  lblScale:'<label>Scale Factor</label>',nlAll:'All nodes',nlBottom:'Bottom nodes',nlManual:'Manual input',
+  lblNLNodes:'<label style="font-size:.79rem;color:#666">Node numbers (comma-separated)</label>',
+  step6H2:'🔍 3D Preview',metricNodes:'Nodes',metricBeams:'Beam Elements',metricRadius:'Radius (mm)',
+  genModelBtn:'Generate Model →',
+  step7H2:'🚀 Generate Model',step7Suffix:'Model Generation',
+  clearLabel:'Clears existing nodes / elements / materials / sections / boundary conditions / loads',
+  genBtnLbl:'⚽ Start Generating Soccer Ball',
+  logInit:'▶ Press the Generate button to start.',noticeTitle:'Screen not updated?',
+  hintShortcutTitle:'Shortcut',hintShortcutDesc:'<code>Ctrl + A</code><br>Select All → Refresh view',
+  hintMouseTitle:'Mouse',hintMouseDesc:'In viewport:<br>Scroll or drag',
+  hintMenuTitle:'Menu',hintMenuDesc:'View → Fit All',
+  toAnalBtnLbl:'Run Analysis →',
+  traceName3dEdge:'Elements (90)',traceName3dNode:'Nodes (60)',
+  traceSup:'Support nodes ({n})',traceLoad:'Load nodes ({n})',
+  step8H2anal:'⚡ Run Analysis',step8H2result:'📊 Analysis Results',
+  badgeWait:'⏸ Waiting',badgeRun:'🔄 Running...',badgeDone:'✅ Complete',badgeErr:'❌ Error',
+  runAnalBtnLbl:'🔬 Start Analysis',
+  alogInit:'▶ Click the Analyze button to start. (Model must be generated first)',
+  lblLoadCase:'Load Case',
+  tabReact:'Reactions',tabDisp:'Displacement',tabMember:'Internal Forces',
+  tabShear:'Shear Force',tabMoment:'Bending Moment',tabTorsion:'Torsional Moment',
+  tabStress:'Stress Ratio / DCR',
+  startOverBtn:'🔄 Start Over',freeTrialBtn:'Free Trial →',
+  logInit5:'Initializing...',logCleared:'Existing data cleared',logMat15:'Creating material...',
+  logMatFail:'Material failed: {msg}',logMatOk:'Material: {name}',logSect25:'Creating section...',
+  logSectFail:'Section failed: {msg}',logSectOk:'Section: {name} ({h}×{b} mm)',
+  logNode38:'Creating nodes...',logNodeFail:'Node creation failed: {msg}',logNodeOk:'Created {n} nodes',
+  logElem52:'Creating elements...',logElemFail:'Element creation failed: {msg}',logElemOk:'Created {n} beam elements',
+  logBC65:'Creating boundary conditions...',logBCFail:'Boundary condition failed: {msg}',
+  logBCOk:'Boundary conditions: {n} nodes ({label})',logBCNone:'Boundary conditions: none',
+  logLoad78:'Creating loads...',logLC:'Load case: [{type}] {name}',
+  logSWFail:'Self-weight failed: {msg}',logSWOk:'  Self-weight ({dir} × {val})',
+  logNLFail:'Nodal load failed: {msg}',logNLOk:'  Nodal loads: {n} nodes (Fz={fz} N)',
+  logNLNone:'  Nodal loads: no target nodes',logDone:'Done!',
+  logModelOk:'🎉 {name} model generated!',logError:'Error: {msg}',
+  alogUnits:'Setting units (N, MM)...',alogUnitsOk:'Units set',
+  alogRunning:'Running analysis... (waiting for completion)',analFailed:'Analysis failed',alogDone:'Analysis complete',
+  alogFetchLC:'Fetching results ({n} load cases)...',
+  alogReact:'Fetching reactions...',alogReactOk:'Reactions: {n} rows',alogReactNone:'No reaction data',
+  alogDisp:'Fetching displacements...',alogDispOk:'Displacements: {n} rows',alogDispNone:'No displacement data',
+  alogForce:'Fetching internal forces (BEAMFORCE)...',alogForceOk:'Internal forces: {n} rows',alogForceNone:'No internal force data',
+  alogStress:'Fetching stress ratio (BEAMSTRESS)...',alogStressOk:'Stress ratio: {n} rows',
+  alogStressNone:'No stress ratio data (normal if design check not run)',
+  alogStressSkip:'Stress ratio fetch skipped ({msg})',alogAllDone:'🎉 Analysis and result retrieval complete!',
+  alogError:'Error: {msg}',
+  statSupNodeCount:'Support node count',chartReact:'Reaction Fz (N) by support node',xaxisNode:'Node No.',
+  statMaxDisp:'Max resultant displacement (mm)',chartDisp:'Dz Displacement Top 20 (mm)',
+  statMemberCount:'Member count',chartAxial:'Axial Force Fx Top 20 (N)',xaxisElem:'Element No.',
+  statMaxShear:'Max shear resultant (N)',chartShear:'Shear Force Top 20 (|Fy|)',yaxisShear:'Shear (N)',
+  chartMoment:'Bending Moment Top 20 (|Mz|)',yaxisMoment:'Moment (N·mm)',
+  noTorsion:'No torsion data (Mx)',chartTorsion:'Torsion Mx Top 20 (N·mm)',
+  noStress:'No stress ratio data (design check not run or not supported)',
+  statMaxStress:'Max stress ratio',statAvgStress:'Avg stress ratio',
+  statOverStress:'Over-limit members (>1.0)',statTotalMember:'Total members',
+  stressName:'Stress Ratio',chartStress:'Stress Ratio Top 20',yaxisStress:'Stress Ratio',
+  supFixLabel:'Fixed (Dx Dy Dz Rx Ry Rz)',supPinLabel:'Hinge (Dx Dy Dz)',
+  supRolLabel:'Roller-Z (Dz)',supCustLabel:'Custom: ',
+  sumSupLabel:'<b>Support:</b> ',sumNodeAuto:'Auto bottom nodes',sumNodeManual:'Manual — ',
+  sumNodeLabel:'<b>Node selection:</b> ',
+  step9Headline:'Try MIDAS for Free<br>Right Now!',
+  step9Sub:'Just like the soccer ball structure you just created and analyzed,<br>turn your ideas into reality with MIDAS Gen NX · Civil NX.',
+  step9CTA:'Apply for Free Trial →',
+  tf1Desc:'Structural analysis for buildings<br>Nonlinear · Seismic · Performance-based design<br>API-driven automation workflow',
+  tf2Desc:'Bridge &amp; civil structure analysis<br>3D · Construction stage · PSC analysis<br>API-driven automation workflow',
+  tf3Desc:'From model creation via REST API<br>to analysis &amp; result extraction —<br>fully automatable',
+  tsStep1:'Apply for Free Trial',tsStep2:'Email Verification',tsStep3:'Download Software',tsStep4:'Start Using Immediately',
+  tlBtn1:'🎁 Apply for Free Trial',tlBtn2:'🌐 MIDAS Official Website',
+  step9BackBtn:'← Back',
+},
+tc:{
+  pageTitle:'與2026北中美世界盃一起體驗MIDAS API最新技術',
+  headerH1:'與2026北中美世界盃一起體驗MIDAS API最新技術',
+  headerMeta:'截角二十面體（足球）結構自動生成 &nbsp;·&nbsp; 開發者：Dennis &nbsp;·&nbsp; V260509',
+  step1:'選擇產品',step2:'API連線',step3:'參數設定',step4:'邊界條件',step5:'載重設定',
+  step6:'3D預覽',step7:'建立模型',step8:'分析',step9:'免費試用',
+  sidebarEyebrow:'MIDAS API 體驗',
+  sidebarH2:'這個示範<br>能體驗什麼？',
+  sidebarDesc:'<strong style="color:#c7d2fe">利用 MIDAS Gen NX / Civil NX 的開放 API</strong>，<br>直接在瀏覽器中生成足球（截角二十面體）結構——<br>從 <strong style="color:#c7d2fe">自動生成 → 分析 → 結果視覺化</strong>，<br>逐步完成。',
+  flow1:'① 選擇產品',flow2:'② API連線',flow3:'③ 參數設定',flow4:'④ 邊界&amp;載重',
+  flow5:'⑤ 3D預覽',flow6:'⑥ 建立模型',flow7:'⑦ 執行分析',flow8:'⑧ 查看結果',
+  nudgeTitle:'尚未取得API憑證？',
+  nudgeDesc:'立即申請免費試用，馬上取得您的 API Key！',
+  nudgeBtn:'免費試用申請 →',
+  wcEyebrow:'FIFA世界盃 2026 · 北中美',
+  wcH2:'🏆 開幕典禮 &amp; 首場比賽',
+  wcLabel1:'開幕典禮',wcDate1:'2026年6月11日（四）',
+  wcKst1:'台灣時間：6月12日（五）08:00 CST',wcVenue:'美國紐澤西州東盧瑟福 MetLife Stadium',
+  wcLabel2:'首場比賽',wcDate2:'2026年6月12日（五）08:00 CST',
+  wcKst2:'當地時間：6月11日（四）20:00 ET',
+  cdLabel:'⏱ 距開幕倒數（台灣時間 CST）',cdInit:'計算中...',cdKickoff:'開幕！🎉',
+  step1H2:'🎯 選擇您的軟體',step1Desc:'請選擇要建立足球結構的 MIDAS 軟體。',
+  genNXDesc:'建築結構專業分析軟體<br>非線性・耐震・性能設計<br>API 自動化工作流程',
+  genNXBadge:'建築結構',
+  civilNXDesc:'橋樑・土木結構分析軟體<br>三維・施工階段・PSC 分析<br>API 自動化工作流程',
+  civilNXBadge:'橋樑・土木',
+  confirmBtn:'確認選擇 →',selectFirst:'請先選擇軟體。',
+  step2H2Suffix:'API 連線',mapiPlaceholder:'請輸入 MAPI Key',
+  showHideKey:'顯示/隱藏金鑰',testConn:'連線測試 →',backBtn:'← 上一步',
+  enterBothAlert:'請輸入您的 MAPI Key。',testingConn:'連線測試中...',
+  connSuccess:'✅ 連線成功！即將進入下一步。',
+  connFail:'❌ 連線失敗（HTTP {status}）。請確認 URL 與 Key 是否正確。',
+  connError:'❌ 連線錯誤：{msg}',
+  step3H2:'📐 結構參數',secSize:'結構尺寸',lblRadius:'半徑 (mm)',
+  lblCx:'中心 X (mm)',lblCy:'中心 Y (mm)',lblCz:'中心 Z (mm)',
+  secMaterial:'材料（鋼材）',lblMatName:'材料名稱',lblElast:'彈性模數 (MPa)',
+  lblPoisn:'浦松比',lblDen:'密度 (N/mm³)',
+  secSection:'斷面（矩形）',lblSectName:'斷面名稱',lblSectH:'高度 H (mm)',lblSectB:'寬度 B (mm)',
+  nextBtn:'下一步 →',
+  step4H2:'🔒 邊界條件（支承）',secSupNode:'支承節點選擇',
+  nodeAuto:'自動（最底部節點）',nodeManual:'手動（直接輸入）',
+  nodeAutoDesc:'依據半徑與中心 Z，自動選取<strong>最底部節點</strong>。',
+  lblManualNodes:'節點編號（逗號分隔，例：1,5,9）',secSupType:'支承類型',
+  supFixName:'固定端',supPinName:'鉸接（Pin）',supRolName:'滾接支承（Z）',supCustName:'自定義',
+  supCustDesc:'選擇自由度',selectDOF:'請選擇要束制的自由度',
+  dofDx:'Dx（X方向平移）',dofDy:'Dy（Y方向平移）',dofDz:'Dz（Z方向平移）',
+  dofRx:'Rx（X軸旋轉）',dofRy:'Ry（Y軸旋轉）',dofRz:'Rz（Z軸旋轉）',
+  step5H2:'⬇️ 載重設定',addLCBtn:'+ 新增載重工況',previewBtn:'預覽 →',
+  lcBadgeLabel:'載重工況',deleteBtn:'刪除',
+  lblLCName:'<label>載重工況名稱</label>',lblLCType:'<label>載重類型</label>',
+  lcOptUser:'USER（使用者自定義）',lcOptD:'D（靜載重）',lcOptL:'L（活載重）',
+  lcOptW:'W（風載重）',lcOptE:'E（地震載重）',lcLoadKind:'載重種類',
+  tagSW:'自重',tagNL:'節點載重',
+  lblDirection:'<label>方向</label>',swDirZ:'-Z（重力方向）',
+  lblScale:'<label>係數</label>',nlAll:'全部節點',nlBottom:'最底部節點',nlManual:'手動輸入',
+  lblNLNodes:'<label style="font-size:.79rem;color:#666">節點編號（逗號分隔）</label>',
+  step6H2:'🔍 3D 預覽',metricNodes:'節點數',metricBeams:'梁元素數',metricRadius:'半徑 (mm)',
+  genModelBtn:'建立模型 →',
+  step7H2:'🚀 建立模型',step7Suffix:'建立模型',
+  clearLabel:'生成前清除現有節點 / 元素 / 材料 / 斷面 / 邊界條件 / 載重',
+  genBtnLbl:'⚽ 開始生成足球結構',
+  logInit:'▶ 請按「建立模型」按鈕開始。',noticeTitle:'畫面未更新？',
+  hintShortcutTitle:'快捷鍵',hintShortcutDesc:'<code>Ctrl + A</code><br>全選 → 更新視圖',
+  hintMouseTitle:'滑鼠',hintMouseDesc:'在視埠中：<br>滾輪或拖曳',
+  hintMenuTitle:'選單',hintMenuDesc:'View → Fit All',
+  toAnalBtnLbl:'執行分析 →',
+  traceName3dEdge:'梁元素 (90)',traceName3dNode:'節點 (60)',
+  traceSup:'支承節點 ({n})',traceLoad:'載重節點 ({n})',
+  step8H2anal:'⚡ 執行分析',step8H2result:'📊 分析結果',
+  badgeWait:'⏸ 等待中',badgeRun:'🔄 分析中...',badgeDone:'✅ 完成',badgeErr:'❌ 錯誤',
+  runAnalBtnLbl:'🔬 開始分析',
+  alogInit:'▶ 請按「開始分析」按鈕。（請先完成模型建立）',
+  lblLoadCase:'載重工況',
+  tabReact:'反力',tabDisp:'位移',tabMember:'內力',
+  tabShear:'剪力',tabMoment:'彎矩',tabTorsion:'扭矩',tabStress:'應力比 / DCR',
+  startOverBtn:'🔄 重新開始',freeTrialBtn:'免費試用申請 →',
+  logInit5:'初始化中...',logCleared:'已清除現有資料',logMat15:'建立材料中...',
+  logMatFail:'材料建立失敗：{msg}',logMatOk:'材料：{name}',logSect25:'建立斷面中...',
+  logSectFail:'斷面建立失敗：{msg}',logSectOk:'斷面：{name} ({h}×{b} mm)',
+  logNode38:'建立節點中...',logNodeFail:'節點建立失敗：{msg}',logNodeOk:'已建立 {n} 個節點',
+  logElem52:'建立元素中...',logElemFail:'元素建立失敗：{msg}',logElemOk:'已建立 {n} 個梁元素',
+  logBC65:'建立邊界條件中...',logBCFail:'邊界條件建立失敗：{msg}',
+  logBCOk:'邊界條件：{n} 個節點（{label}）',logBCNone:'邊界條件：無',
+  logLoad78:'建立載重中...',logLC:'載重工況：[{type}] {name}',
+  logSWFail:'自重建立失敗：{msg}',logSWOk:'  自重（{dir} × {val}）',
+  logNLFail:'節點載重建立失敗：{msg}',logNLOk:'  節點載重：{n} 個節點（Fz={fz} N）',
+  logNLNone:'  節點載重：無目標節點',logDone:'完成！',
+  logModelOk:'🎉 {name} 模型建立完成！',logError:'錯誤：{msg}',
+  alogUnits:'設定單位 (N, MM)...',alogUnitsOk:'單位設定完成',
+  alogRunning:'分析執行中...（等待完成）',analFailed:'分析失敗',alogDone:'分析完成',
+  alogFetchLC:'擷取結果中（{n} 個載重工況）...',
+  alogReact:'擷取反力中...',alogReactOk:'反力：{n} 筆資料',alogReactNone:'無反力資料',
+  alogDisp:'擷取位移中...',alogDispOk:'位移：{n} 筆資料',alogDispNone:'無位移資料',
+  alogForce:'擷取內力 (BEAMFORCE)...',alogForceOk:'內力：{n} 筆資料',alogForceNone:'無內力資料',
+  alogStress:'擷取應力比 (BEAMSTRESS)...',alogStressOk:'應力比：{n} 筆資料',
+  alogStressNone:'無應力比資料（未執行設計檢核時為正常）',
+  alogStressSkip:'應力比擷取略過（{msg}）',alogAllDone:'🎉 分析及結果擷取完成！',
+  alogError:'錯誤：{msg}',
+  statSupNodeCount:'支承節點數',chartReact:'反力 Fz (N) — 各支承節點',xaxisNode:'節點編號',
+  statMaxDisp:'最大合成位移 (mm)',chartDisp:'Dz 位移 Top 20 (mm)',
+  statMemberCount:'構件數',chartAxial:'軸力 Fx Top 20 (N)',xaxisElem:'元素編號',
+  statMaxShear:'最大剪力合力 (N)',chartShear:'剪力 Top 20 (|Fy|)',yaxisShear:'剪力 (N)',
+  chartMoment:'彎矩 Top 20 (|Mz|)',yaxisMoment:'彎矩 (N·mm)',
+  noTorsion:'無扭矩資料 (Mx)',chartTorsion:'扭矩 Mx Top 20 (N·mm)',
+  noStress:'無應力比資料（未執行設計檢核或 API 不支援）',
+  statMaxStress:'最大應力比',statAvgStress:'平均應力比',
+  statOverStress:'超限構件 (>1.0)',statTotalMember:'構件總數',
+  stressName:'應力比',chartStress:'應力比 Top 20',yaxisStress:'應力比',
+  supFixLabel:'固定端 (Dx Dy Dz Rx Ry Rz)',supPinLabel:'鉸接 (Dx Dy Dz)',
+  supRolLabel:'滾接支承-Z (Dz)',supCustLabel:'自定義：',
+  sumSupLabel:'<b>支承：</b>',sumNodeAuto:'自動（最底部節點）',sumNodeManual:'手動 — ',
+  sumNodeLabel:'<b>節點選擇：</b>',
+  step9Headline:'立即免費體驗<br>MIDAS！',
+  step9Sub:'就像您剛才親手建立並分析的足球結構，<br>用 MIDAS Gen NX · Civil NX 將您的設計構想化為現實。',
+  step9CTA:'免費試用申請 →',
+  tf1Desc:'建築結構專業分析軟體<br>非線性・耐震・性能設計<br>API 自動化工作流程',
+  tf2Desc:'橋樑・土木結構分析軟體<br>三維・施工階段・PSC 分析<br>API 自動化工作流程',
+  tf3Desc:'透過 REST API 自動完成<br>模型建立・分析執行・結果擷取<br>全流程自動化',
+  tsStep1:'申請免費試用',tsStep2:'電子郵件驗證',tsStep3:'下載軟體',tsStep4:'立即開始使用',
+  tlBtn1:'🎁 免費試用申請',tlBtn2:'🌐 MIDAS 官方網站',
+  step9BackBtn:'← 上一步',
+}
+};
+
+let currentLang = 'ko';
+function t(key){ return (STRINGS[currentLang]||{})[key] || (STRINGS.en||{})[key] || key; }
+
+let badgeState = 'wait';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang==='ko'?'ko':lang==='tc'?'zh-TW':'en';
+  document.title = t('pageTitle');
+  // Update all tagged elements
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+  // Language button state
+  ['langKo','langEn','langTc'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+  document.getElementById(lang==='ko'?'langKo':lang==='en'?'langEn':'langTc')?.classList.add('active');
+  // Dynamic elements
+  setBadge(badgeState);
+  const lb = document.getElementById('logBox');
+  if(lb && lb.dataset.initial==='1') lb.innerHTML=`<span style="color:#f8c94f">${t('logInit')}</span>`;
+  const al = document.getElementById('analysisLog');
+  if(al && al.dataset.initial==='1') al.innerHTML=`<span style="color:#f8c94f">${t('alogInit')}</span>`;
+  // Update apiTitle / genPageTitle if product already selected
+  if(selectedProduct){
+    const name = selectedProduct==='gen'?'Gen NX':'Civil NX';
+    document.getElementById('apiTitle').textContent=`🔗 ${name} ${t('step2H2Suffix')}`;
+    const gpt=document.getElementById('genPageTitle');
+    if(gpt){gpt.textContent=`🚀 ${name} ${t('step7Suffix')}`;}
+  }
+  // Re-render load cases with current language (full rebuild preserving values)
+  if(typeof lcCount!=='undefined'&&lcCount>0){
+    const saves=[];
+    for(let i=1;i<=lcCount;i++){
+      if(!document.getElementById('lc'+i)) continue;
+      saves.push({
+        name:document.getElementById('lcName'+i)?.value||'LC'+i,
+        type:document.getElementById('lcType'+i)?.value||'D',
+        tab:document.getElementById('tagSW'+i)?.classList.contains('on')?'sw':'nl',
+        swDir:document.getElementById('swDir'+i)?.value||'Z',
+        swVal:document.getElementById('swVal'+i)?.value||'-1',
+        nlMode:document.getElementById('nlTab1_'+i)?.classList.contains('on')?'all':
+               document.getElementById('nlTab2_'+i)?.classList.contains('on')?'bottom':'manual',
+        nlNodes:document.getElementById('nlNodes'+i)?.value||'',
+        nlFx:document.getElementById('nlFx'+i)?.value||'0',
+        nlFy:document.getElementById('nlFy'+i)?.value||'0',
+        nlFz:document.getElementById('nlFz'+i)?.value||'-1000',
+        nlMx:document.getElementById('nlMx'+i)?.value||'0',
+        nlMy:document.getElementById('nlMy'+i)?.value||'0',
+        nlMz:document.getElementById('nlMz'+i)?.value||'0',
+      });
+      document.getElementById('lc'+i).remove();
+    }
+    lcCount=0;
+    saves.forEach(s=>{
+      addLC();
+      const id=lcCount;
+      document.getElementById('lcName'+id).value=s.name;
+      document.getElementById('lcType'+id).value=s.type;
+      if(typeof setLCTab==='function') setLCTab(id,s.tab);
+      document.getElementById('swDir'+id).value=s.swDir;
+      document.getElementById('swVal'+id).value=s.swVal;
+      if(typeof setNLMode==='function') setNLMode(id,s.nlMode);
+      if(s.nlNodes) document.getElementById('nlNodes'+id).value=s.nlNodes;
+      document.getElementById('nlFx'+id).value=s.nlFx;
+      document.getElementById('nlFy'+id).value=s.nlFy;
+      document.getElementById('nlFz'+id).value=s.nlFz;
+      document.getElementById('nlMx'+id).value=s.nlMx;
+      document.getElementById('nlMy'+id).value=s.nlMy;
+      document.getElementById('nlMz'+id).value=s.nlMz;
+    });
+  }
+  // Update boundary condition preview
+  if(typeof updateSupPreview==='function') updateSupPreview();
+  // Save preference
+  try{localStorage.setItem('wizLang',lang);}catch(e){}
+}
+
+// ── D-Day countdown (2026 FIFA World Cup opening match, KST) ──
+(function(){
+  // 2026-06-12 09:00 KST = UTC 2026-06-12 00:00:00
+  const target = new Date('2026-06-12T00:00:00Z');
+  function tick(){
+    const el=document.getElementById('countdown-val'); if(!el) return;
+    const diff=target-Date.now();
+    if(diff<=0){ el.textContent=t('cdKickoff'); return; }
+    const d=Math.floor(diff/864e5);
+    const h=Math.floor((diff%864e5)/36e5);
+    const m=Math.floor((diff%36e5)/6e4);
+    const s=Math.floor((diff%6e4)/1e3);
+    el.textContent=`D-${d}  ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+
+// ──────────────────────────────────────────────────────────────
+// Product selection
+// ──────────────────────────────────────────────────────────────
+let selectedProduct = null;
+let apiConnected = false;
+
+function selectProduct(prod) {
+  selectedProduct = prod;
+  document.getElementById('prodGen').classList.toggle('selected', prod === 'gen');
+  document.getElementById('prodCivil').classList.toggle('selected', prod === 'civil');
+  document.getElementById('prodAlert').classList.add('hidden');
+}
+
+function confirmProduct() {
+  if (!selectedProduct) { showAlert('prodAlert','error',t('selectFirst')); return; }
+  const name = selectedProduct === 'gen' ? 'Gen NX' : 'Civil NX';
+  document.getElementById('apiTitle').textContent = `🔗 ${name} ${t('step2H2Suffix')}`;
+  document.getElementById('genPageTitle').textContent = `🚀 ${name} ${t('step7Suffix')}`; document.getElementById('genPageTitle').dataset.dynamic='1';
+  document.getElementById('noticeTitle').textContent = `${name}: ${t('noticeTitle')}`;
+  goTo(2);
+}
+
+// ──────────────────────────────────────────────────────────────
+// Geometry calculation
+// ──────────────────────────────────────────────────────────────
+const PHI = (1 + Math.sqrt(5)) / 2;
+
+function soccerVerts(radius, cx, cy, cz) {
+  const raw = [];
+  for (const s1 of [1,-1]) for (const s2 of [1,-1]) {
+    raw.push([0,s1,s2*3*PHI],[s1,s2*3*PHI,0],[s2*3*PHI,0,s1]);
+  }
+  for (const s1 of [1,-1]) for (const s2 of [1,-1]) for (const s3 of [1,-1]) {
+    raw.push([s1,s2*(2+PHI),s3*2*PHI],[s2*(2+PHI),s3*2*PHI,s1],[s3*2*PHI,s1,s2*(2+PHI)]);
+    raw.push([s1*2,s2*(1+2*PHI),s3*PHI],[s2*(1+2*PHI),s3*PHI,s1*2],[s3*PHI,s1*2,s2*(1+2*PHI)]);
+  }
+  return raw.map(v => {
+    const len = Math.sqrt(v[0]**2+v[1]**2+v[2]**2);
+    return [v[0]/len*radius+cx, v[1]/len*radius+cy, v[2]/len*radius+cz];
+  });
+}
+
+function soccerEdges(verts, tol=0.05) {
+  const n = verts.length; let minD = Infinity;
+  for (let i=0;i<n;i++) for (let j=i+1;j<n;j++) { const d=dist3(verts[i],verts[j]); if(d<minD)minD=d; }
+  const edges=[];
+  for (let i=0;i<n;i++) for (let j=i+1;j<n;j++) if(dist3(verts[i],verts[j])<minD*(1+tol)) edges.push([i,j]);
+  return edges;
+}
+
+function dist3(a,b){ return Math.sqrt((a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2); }
+
+function bottomNodeIndices(verts, tol=0.05) {
+  const minZ = Math.min(...verts.map(v=>v[2]));
+  const range = (+document.getElementById('radius').value || 5000) * tol;
+  return verts.map((v,i)=>v[2]<=minZ+range?i:-1).filter(i=>i>=0);
+}
+
+// ──────────────────────────────────────────────────────────────
+// Backend URL — update after Vercel deployment
+// ──────────────────────────────────────────────────────────────
+const BACKEND_URL = 'https://soccer-back-end.vercel.app';
+
+// ──────────────────────────────────────────────────────────────
+// STEP 2: Connection test (via backend)
+// ──────────────────────────────────────────────────────────────
+async function testConn() {
+  const key = document.getElementById('mapiKey').value;
+  if (!key) { showAlert('connAlert','error',t('enterBothAlert')); return; }
+  showAlert('connAlert','info',t('testingConn'));
+  try {
+    const r = await fetch(`${BACKEND_URL}/api/connect`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ product: selectedProduct, apiKey: key })
+    });
+    const data = await r.json();
+    if (data.ok) { apiConnected=true; showAlert('connAlert','success',t('connSuccess')); setTimeout(()=>goTo(3),800); }
+    else          showAlert('connAlert','error',t('connFail').replace('{status}', data.error||'unknown'));
+  } catch(e) { showAlert('connAlert','error',t('connError').replace('{msg}',e.message)); }
+}
+
+function showAlert(id,type,msg) {
+  const el=document.getElementById(id);
+  el.className=`alert alert-${type}`; el.textContent=msg; el.classList.remove('hidden');
+}
+
+// ──────────────────────────────────────────────────────────────
+// STEP 4: Boundary conditions
+// ──────────────────────────────────────────────────────────────
+let nodeMode='auto', supType='fix';
+
+function setNodeMode(m) {
+  nodeMode=m;
+  document.getElementById('nodeTab1').className='node-tab'+(m==='auto'?' on':'');
+  document.getElementById('nodeTab2').className='node-tab'+(m==='manual'?' on':'');
+  document.getElementById('nodeAutoInfo').classList.toggle('hidden', m!=='auto');
+  document.getElementById('nodeManualInput').classList.toggle('hidden', m!=='manual');
+  updateSupPreview();
+}
+
+function setSup(t) {
+  supType=t;
+  ['Fix','Pin','RolZ','Cust'].forEach(k=>document.getElementById('sup'+k).classList.remove('selected'));
+  document.getElementById('sup'+{fix:'Fix',pin:'Pin',rolz:'RolZ',custom:'Cust'}[t]).classList.add('selected');
+  document.getElementById('dofPanel').classList.toggle('hidden', t!=='custom');
+  if(t==='fix')  setDOF(true,true,true,true,true,true);
+  if(t==='pin')  setDOF(true,true,true,false,false,false);
+  if(t==='rolz') setDOF(false,false,true,false,false,false);
+  updateSupPreview();
+}
+
+function setDOF(dx,dy,dz,rx,ry,rz) {
+  ['dDx','dDy','dDz','dRx','dRy','dRz'].forEach((id,i)=>document.getElementById(id).checked=[dx,dy,dz,rx,ry,rz][i]);
+}
+
+function getDOFString() {
+  return ['dDx','dDy','dDz','dRx','dRy','dRz'].map(id=>document.getElementById(id).checked?'1':'0').join('')+'0';
+}
+
+function getConstraint() {
+  if(supType==='fix') return '1111110';
+  if(supType==='pin') return '1110000';
+  if(supType==='rolz') return '0010000';
+  return getDOFString();
+}
+
+function getConstraintLabel() {
+  if(supType==='fix') return t('supFixLabel');
+  if(supType==='pin') return t('supPinLabel');
+  if(supType==='rolz') return t('supRolLabel');
+  const s=getDOFString();
+  return t('supCustLabel')+['Dx','Dy','Dz','Rx','Ry','Rz'].filter((_,i)=>s[i]==='1').join(', ');
+}
+
+function updateSupPreview() {
+  document.getElementById('supPreview').innerHTML =
+    `${t('sumSupLabel')}${getConstraintLabel()}<br>`+
+    `${t('sumNodeLabel')} ${nodeMode==='auto'?t('sumNodeAuto'):t('sumNodeManual')+document.getElementById('manualNodes').value}`;
+}
+
+document.addEventListener('change', e=>{ if(e.target.closest('#dofPanel')) updateSupPreview(); });
+document.getElementById('manualNodes')?.addEventListener('input', updateSupPreview);
+setSup('fix');
+
+// ──────────────────────────────────────────────────────────────
+// STEP 5: Load cases
+// ──────────────────────────────────────────────────────────────
+let lcCount=0;
+
+function addLC() {
+  lcCount++;
+  const id=lcCount;
+  const div=document.createElement('div');
+  div.className='lc-row'; div.id=`lc${id}`;
+  div.innerHTML=`
+    <div class="lc-header">
+      <span class="lc-badge">${t('lcBadgeLabel')} #${id}</span>
+      <button class="btn btn-danger" onclick="removeLC(${id})">${t('deleteBtn')}</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">${t('lblLCName')}<input id="lcName${id}" type="text" value="LC${id}"></div>
+      <div class="form-group">${t('lblLCType')}
+        <select id="lcType${id}">
+          <option value="USER">${t('lcOptUser')}</option>
+          <option value="D" selected>${t('lcOptD')}</option>
+          <option value="L">${t('lcOptL')}</option>
+          <option value="W">${t('lcOptW')}</option>
+          <option value="E">${t('lcOptE')}</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin:12px 0 8px;font-size:.8rem;font-weight:600;color:#555">${t('lcLoadKind')}</div>
+    <div class="tag-toggle">
+      <div class="tag on" id="tagSW${id}" onclick="setLCTab(${id},'sw')">${t('tagSW')}</div>
+      <div class="tag"   id="tagNL${id}" onclick="setLCTab(${id},'nl')">${t('tagNL')}</div>
+    </div>
+    <div id="swPanel${id}" style="margin-top:12px">
+      <div class="form-grid">
+        <div class="form-group">${t('lblDirection')}
+          <select id="swDir${id}"><option value="Z" selected>${t('swDirZ')}</option><option value="X">-X</option><option value="Y">-Y</option></select>
+        </div>
+        <div class="form-group">${t('lblScale')}<input id="swVal${id}" type="number" value="-1" step="0.1"></div>
+      </div>
+    </div>
+    <div id="nlPanel${id}" class="hidden" style="margin-top:12px">
+      <div style="margin-bottom:8px">
+        <div class="node-mode-tabs">
+          <div class="node-tab on" id="nlTab1_${id}" onclick="setNLMode(${id},'all')">${t('nlAll')}</div>
+          <div class="node-tab"   id="nlTab2_${id}" onclick="setNLMode(${id},'bottom')">${t('nlBottom')}</div>
+          <div class="node-tab"   id="nlTab3_${id}" onclick="setNLMode(${id},'manual')">${t('nlManual')}</div>
+        </div>
+        <div id="nlManualWrap${id}" class="hidden" style="margin-top:6px">
+          ${t('lblNLNodes')}
+          <input id="nlNodes${id}" type="text" placeholder="1, 5, 9">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label>Fx (N)</label><input id="nlFx${id}" type="number" value="0"></div>
+        <div class="form-group"><label>Fy (N)</label><input id="nlFy${id}" type="number" value="0"></div>
+        <div class="form-group"><label>Fz (N)</label><input id="nlFz${id}" type="number" value="-1000"></div>
+        <div class="form-group"><label>Mx (N·mm)</label><input id="nlMx${id}" type="number" value="0"></div>
+        <div class="form-group"><label>My (N·mm)</label><input id="nlMy${id}" type="number" value="0"></div>
+        <div class="form-group"><label>Mz (N·mm)</label><input id="nlMz${id}" type="number" value="0"></div>
+      </div>
+    </div>`;
+  document.getElementById('lcList').appendChild(div);
+}
+
+function removeLC(id){ document.getElementById(`lc${id}`)?.remove(); }
+
+function setLCTab(id,tab) {
+  document.getElementById(`tagSW${id}`).className='tag'+(tab==='sw'?' on':'');
+  document.getElementById(`tagNL${id}`).className='tag'+(tab==='nl'?' on':'');
+  document.getElementById(`swPanel${id}`).classList.toggle('hidden', tab!=='sw');
+  document.getElementById(`nlPanel${id}`).classList.toggle('hidden', tab!=='nl');
+}
+
+function setNLMode(id,mode) {
+  [`nlTab1_${id}`,`nlTab2_${id}`,`nlTab3_${id}`].forEach((tid,i)=>{
+    document.getElementById(tid).className='node-tab'+(['all','bottom','manual'][i]===mode?' on':'');
+  });
+  document.getElementById(`nlManualWrap${id}`).classList.toggle('hidden', mode!=='manual');
+}
+
+// addLC() is called in the language-init IIFE so it runs after the correct language is set
+
+// ──────────────────────────────────────────────────────────────
+// STEP 6: 3D preview
+// ──────────────────────────────────────────────────────────────
+function renderPlot() {
+  const radius=+v('radius'),cx=+v('cx'),cy=+v('cy'),cz=+v('cz');
+  document.getElementById('radiusLabel').textContent=radius.toLocaleString();
+  const verts=soccerVerts(radius,cx,cy,cz), edges=soccerEdges(verts);
+  const ex=[],ey=[],ez=[];
+  edges.forEach(([i,j])=>{ ex.push(verts[i][0],verts[j][0],null); ey.push(verts[i][1],verts[j][1],null); ez.push(verts[i][2],verts[j][2],null); });
+  const traces=[
+    {type:'scatter3d',x:ex,y:ey,z:ez,mode:'lines',line:{color:'#e07000',width:3},name:t('traceName3dEdge')},
+    {type:'scatter3d',x:verts.map(v=>v[0]),y:verts.map(v=>v[1]),z:verts.map(v=>v[2]),mode:'markers',marker:{size:4,color:'#4361ee'},name:t('traceName3dNode')}
+  ];
+  const supIdx=getSupportNodeIndices(verts);
+  if(supIdx.length>0) traces.push({type:'scatter3d',x:supIdx.map(i=>verts[i][0]),y:supIdx.map(i=>verts[i][1]),z:supIdx.map(i=>verts[i][2]),mode:'markers',marker:{size:8,color:'#ff6b6b',symbol:'diamond'},name:t('traceSup').replace('{n}',supIdx.length)});
+  const nlNodes=getAllNodalLoadNodes(verts);
+  if(nlNodes.length>0) traces.push({type:'scatter3d',x:nlNodes.map(i=>verts[i][0]),y:nlNodes.map(i=>verts[i][1]),z:nlNodes.map(i=>verts[i][2]),mode:'markers',marker:{size:8,color:'#2ec4b6',symbol:'square'},name:t('traceLoad').replace('{n}',nlNodes.length)});
+  Plotly.newPlot('plot',traces,{scene:{xaxis:{title:'X'},yaxis:{title:'Y'},zaxis:{title:'Z'},aspectmode:'data'},margin:{l:0,r:0,t:10,b:0},legend:{x:0,y:1},paper_bgcolor:'#fafafa'},{responsive:true});
+}
+
+function getSupportNodeIndices(verts) {
+  if(nodeMode==='auto') return bottomNodeIndices(verts);
+  return document.getElementById('manualNodes').value.split(',').map(s=>parseInt(s.trim())-1).filter(i=>i>=0&&i<verts.length);
+}
+
+function getAllNodalLoadNodes(verts) {
+  const set=new Set();
+  for(let id=1;id<=lcCount;id++) {
+    const el=document.getElementById(`lc${id}`); if(!el) continue;
+    if(!document.getElementById(`tagNL${id}`)?.classList.contains('on')) continue;
+    const m=document.getElementById(`nlTab1_${id}`).classList.contains('on')?'all':document.getElementById(`nlTab2_${id}`).classList.contains('on')?'bottom':'manual';
+    if(m==='all') verts.forEach((_,i)=>set.add(i));
+    else if(m==='bottom') bottomNodeIndices(verts).forEach(i=>set.add(i));
+    else (document.getElementById(`nlNodes${id}`).value||'').split(',').map(s=>parseInt(s.trim())-1).filter(i=>i>=0&&i<verts.length).forEach(i=>set.add(i));
+  }
+  return [...set];
+}
+
+// ──────────────────────────────────────────────────────────────
+// STEP 7 : Model Generation
+// ──────────────────────────────────────────────────────────────
+function v(id){ return document.getElementById(id)?.value||''; }
+const logBox=()=>document.getElementById('logBox');
+function log(msg,type='ok'){
+  const d=document.createElement('div');
+  d.style.color=type==='ok'?'#2ec4b6':type==='err'?'#ff6b6b':'#f8c94f';
+  d.textContent=(type==='ok'?'✅ ':type==='err'?'❌ ':'⏳ ')+msg;
+  logBox().appendChild(d); logBox().scrollTop=logBox().scrollHeight;
+}
+function setProgress(pct,label){
+  document.getElementById('progressWrap').classList.remove('hidden');
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('progressLabel').textContent=label;
+}
+
+async function generate() {
+  const btn=document.getElementById('genBtn'); btn.disabled=true;
+  document.getElementById('toAnalBtn').disabled=true;
+  const lb2=logBox(); lb2.innerHTML=''; delete lb2.dataset.initial; document.getElementById('fitNotice').classList.add('hidden');
+  setProgress(10,t('logInit5'));
+
+  // Collect load cases from UI
+  const loadCases=[];
+  for(let id=1;id<=lcCount;id++) {
+    if(!document.getElementById(`lc${id}`)) continue;
+    const isSW=document.getElementById(`tagSW${id}`)?.classList.contains('on');
+    const nlMode=document.getElementById(`nlTab1_${id}`)?.classList.contains('on')?'all':
+                 document.getElementById(`nlTab2_${id}`)?.classList.contains('on')?'bottom':'manual';
+    loadCases.push({
+      name:v(`lcName${id}`)||`LC${id}`, type:v(`lcType${id}`)||'D', isSW,
+      swDir:v(`swDir${id}`)||'Z', swVal:parseFloat(v(`swVal${id}`)||'-1'),
+      nlMode, nlNodes:v(`nlNodes${id}`)||'',
+      nlFx:+v(`nlFx${id}`),nlFy:+v(`nlFy${id}`),nlFz:+v(`nlFz${id}`),
+      nlMx:+v(`nlMx${id}`),nlMy:+v(`nlMy${id}`),nlMz:+v(`nlMz${id}`)
+    });
+  }
+
+  try {
+    const r=await fetch(`${BACKEND_URL}/api/generate`,{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        product:selectedProduct,
+        apiKey:document.getElementById('mapiKey').value,
+        params:{
+          radius:+v('radius'),cx:+v('cx'),cy:+v('cy'),cz:+v('cz'),
+          matName:v('matName'),elast:+v('elast'),poisn:+v('poisn'),den:+v('den'),
+          sectName:v('sectName'),sectH:+v('sectH'),sectB:+v('sectB'),
+          clearModel:document.getElementById('clearModel').checked,
+          nodeMode, manualNodes:document.getElementById('manualNodes').value,
+          constraint:getConstraint(),
+          loadCases
+        }
+      })
+    });
+    const data=await r.json();
+    if(data.logs) data.logs.forEach(({msg,type})=>log(msg,type||'ok'));
+    setProgress(100,t('logDone'));
+    if(data.ok) {
+      document.getElementById('fitNotice').classList.remove('hidden');
+      document.getElementById('toAnalBtn').disabled=false;
+    }
+  } catch(e) { log(t('logError').replace('{msg}',e.message),'err');
+  }
+  btn.disabled=false;
+}
+
+// ──────────────────────────────────────────────────────────────
+// STEP 8: Analysis & Results
+// ──────────────────────────────────────────────────────────────
+let analysisData = { react:null, disp:null, force:null, stress:null };
+let resultLCList = [];
+let currentResultTab = 'react';
+
+function alog(msg, type='ok') {
+  const el=document.getElementById('analysisLog');
+  const d=document.createElement('div');
+  d.style.color=type==='ok'?'#2ec4b6':type==='err'?'#ff6b6b':'#f8c94f';
+  d.textContent=(type==='ok'?'✅ ':type==='err'?'❌ ':'⏳ ')+msg;
+  el.appendChild(d); el.scrollTop=el.scrollHeight;
+}
+
+function setBadge(state) {
+  badgeState=state;
+  const el=document.getElementById('analysisBadge');
+  const map={wait:['badge-wait',t('badgeWait')],run:['badge-run',t('badgeRun')],done:['badge-done',t('badgeDone')],err:['badge-err',t('badgeErr')]};
+  el.className='analysis-badge '+map[state][0];
+  el.textContent=map[state][1];
+}
+
+function getActiveLCNames() {
+  const list=[];
+  for(let id=1;id<=lcCount;id++) {
+    if(!document.getElementById(`lc${id}`)) continue;
+    const nm=v(`lcName${id}`)||`LC${id}`;
+    list.push(nm+'(ST)');
+  }
+  return list.length>0?list:['LC1(ST)'];
+}
+
+async function runAnalysis() {
+  const btn=document.getElementById('runAnalBtn');
+  btn.disabled=true;
+  const al2=document.getElementById('analysisLog'); al2.innerHTML=''; delete al2.dataset.initial;
+  document.getElementById('resultCard').classList.add('hidden');
+  setBadge('run');
+  alog(t('alogRunning'),'info');
+
+  try {
+    const lcNames=getActiveLCNames();
+    const r=await fetch(`${BACKEND_URL}/api/analyze`,{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        product:selectedProduct,
+        apiKey:document.getElementById('mapiKey').value,
+        lcNames
+      })
+    });
+    const data=await r.json();
+    if(data.logs) data.logs.forEach(({msg,type})=>alog(msg,type||'ok'));
+
+    if(data.ok) {
+      analysisData={react:data.react,disp:data.disp,force:data.force,stress:data.stress};
+      resultLCList=data.lcNames;
+      buildLCSelector(data.lcNames);
+      showResultTab('react');
+      document.getElementById('resultCard').classList.remove('hidden');
+      setBadge('done');
+    } else {
+      setBadge('err');
+    }
+  } catch(e) {
+    setBadge('err');
+    alog(t('alogError').replace('{msg}',e.message),'err');
+  }
+  btn.disabled=false;
+}
+
+function buildLCSelector(lcNames) {
+  const sel=document.getElementById('resultLC');
+  sel.innerHTML='';
+  lcNames.forEach(nm=>{ const opt=document.createElement('option'); opt.value=nm; opt.textContent=nm; sel.appendChild(opt); });
+}
+
+const ALL_TABS = ['react','disp','member','shear','moment','torsion','stress'];
+
+function showResultTab(tab) {
+  currentResultTab=tab;
+  ALL_TABS.forEach(t=>{
+    document.getElementById(`rtab-${t}`).classList.toggle('on', t===tab);
+    document.getElementById(`panel-${t}`).classList.toggle('hidden', t!==tab);
+  });
+  refreshResultDisplay();
+}
+
+function refreshResultDisplay() {
+  const lc=document.getElementById('resultLC').value;
+  if(currentResultTab==='react')   renderReact(lc);
+  else if(currentResultTab==='disp')    renderDisp(lc);
+  else if(currentResultTab==='member')  renderMember(lc);
+  else if(currentResultTab==='shear')   renderShear(lc);
+  else if(currentResultTab==='moment')  renderMoment(lc);
+  else if(currentResultTab==='torsion') renderTorsion(lc);
+  else if(currentResultTab==='stress')  renderStress(lc);
+}
+
+// ── Number format ──
+function fmt(v){ if(v===null||v===undefined||v==='') return '-'; const n=parseFloat(v); if(isNaN(n)) return v; return n.toFixed(3); }
+function fmtClass(v){ const n=parseFloat(v); if(isNaN(n)) return ''; return n>0?'hi-pos':n<0?'hi-neg':''; }
+function colIdx(head,name){ return head.findIndex(h=>h.toLowerCase().includes(name.toLowerCase())); }
+
+// ── Reactions ──
+function renderReact(lc) {
+  const d=analysisData.react; if(!d) return;
+  const rows=d.data.filter(r=>String(r[1])===lc||String(r[colIdx(d.head,'load')])===lc);
+  const hiReact=rows.length===0?d.data:rows;
+
+  const fxi=colIdx(d.head,'FX'), fyi=colIdx(d.head,'FY'), fzi=colIdx(d.head,'FZ');
+  const mxi=colIdx(d.head,'MX'), myi=colIdx(d.head,'MY'), mzi=colIdx(d.head,'MZ');
+  const ni=0;
+
+  const fzVals=hiReact.map(r=>parseFloat(r[fzi])||0);
+  const sumFz=fzVals.reduce((a,b)=>a+b,0);
+  const maxFz=Math.max(...fzVals.map(Math.abs));
+  const maxFxy=Math.max(...hiReact.map(r=>Math.sqrt((parseFloat(r[fxi])||0)**2+(parseFloat(r[fyi])||0)**2)));
+
+  document.getElementById('statReact').innerHTML=`
+    <div class="stat-card"><div class="stat-val">${fmt(sumFz)}</div><div class="stat-lbl">ΣFz (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxFz)}</div><div class="stat-lbl">Max |Fz| (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxFxy)}</div><div class="stat-lbl">Max |Fxy| (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${hiReact.length}</div><div class="stat-lbl">Support node count</div></div>`;
+
+  const nodes=hiReact.map(r=>r[ni]), fzs=hiReact.map(r=>parseFloat(r[fzi])||0);
+  Plotly.newPlot('chart-react',[{type:'bar',x:nodes.map(String),y:fzs,marker:{color:fzs.map(v=>v>=0?'#4361ee':'#ff6b6b')},name:'Fz (N)'}],
+    {title:{text:t('chartReact'),font:{size:13}},xaxis:{title:t('xaxisNode'),type:'category'},yaxis:{title:'Fz (N)'},margin:{t:40,b:50,l:70,r:20},height:300,paper_bgcolor:'#fafafa',plot_bgcolor:'#fafafa'},{responsive:true});
+
+  renderTable('table-react', d.head, hiReact, [fxi,fyi,fzi,mxi,myi,mzi]);
+}
+
+// ── Displacements ──
+function renderDisp(lc) {
+  const d=analysisData.disp; if(!d) return;
+  const rows=d.data.filter(r=>String(r[1])===lc||String(r[colIdx(d.head,'load')])===lc);
+  const use=rows.length===0?d.data:rows;
+
+  const dxi=colIdx(d.head,'DX'), dyi=colIdx(d.head,'DY'), dzi=colIdx(d.head,'DZ');
+  const dxs=use.map(r=>parseFloat(r[dxi])||0), dys=use.map(r=>parseFloat(r[dyi])||0), dzs=use.map(r=>parseFloat(r[dzi])||0);
+  const maxDz=Math.max(...dzs.map(Math.abs)), minDz=Math.min(...dzs), maxDxy=Math.max(...use.map((_,i)=>Math.sqrt(dxs[i]**2+dys[i]**2)));
+  const maxD=Math.max(...use.map((_,i)=>Math.sqrt(dxs[i]**2+dys[i]**2+dzs[i]**2)));
+
+  document.getElementById('statDisp').innerHTML=`
+    <div class="stat-card"><div class="stat-val">${fmt(minDz)}</div><div class="stat-lbl">Min Dz (mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxDz)}</div><div class="stat-lbl">Max |Dz| (mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxDxy)}</div><div class="stat-lbl">Max |Dxy| (mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxD)}</div><div class="stat-lbl">Max resultant displacement (mm)</div></div>`;
+
+  const nodes=use.map(r=>r[0]);
+  const sorted=[...dzs.map((dz,i)=>({i,dz,node:nodes[i]}))].sort((a,b)=>a.dz-b.dz).slice(0,20);
+  Plotly.newPlot('chart-disp',
+    [{type:'bar',x:sorted.map(s=>String(s.node)),y:sorted.map(s=>s.dz),marker:{color:sorted.map(s=>s.dz>=0?'#4361ee':'#ff6b6b')},name:'Dz (mm)'}],
+    {title:{text:t('chartDisp'),font:{size:13}},xaxis:{title:t('xaxisNode'),type:'category'},yaxis:{title:'Dz (mm)'},margin:{t:40,b:50,l:70,r:20},height:300,paper_bgcolor:'#fafafa',plot_bgcolor:'#fafafa'},{responsive:true});
+
+  renderTable('table-disp', d.head, use, [dxi,dyi,dzi,colIdx(d.head,'RX'),colIdx(d.head,'RY'),colIdx(d.head,'RZ')]);
+}
+
+// ── Common: BEAMFORCE data — load case filter + column index ──
+function getForceRows(lc) {
+  const d=analysisData.force; if(!d) return null;
+  const rows=d.data.filter(r=>String(r[2])===lc||String(r[colIdx(d.head,'load')])===lc);
+  const all=rows.length===0?d.data:rows;
+  const parti=colIdx(d.head,'Part');
+  const partI=all.filter(r=>String(r[parti]||'').toLowerCase().includes('parti')||String(r[parti]||'')===('I'));
+  const use=partI.length>0?partI:all;
+  return {d, all, use,
+    exi:  colIdx(d.head,'Elem')<0?0:colIdx(d.head,'Elem'),
+    axli: d.head.findIndex(h=>h.toLowerCase().includes('axial')||h.toLowerCase()==='fx'),
+    shyi: d.head.findIndex(h=>h.toLowerCase().includes('shear-y')||h.toLowerCase()==='fy'),
+    shzi: d.head.findIndex(h=>h.toLowerCase().includes('shear-z')||h.toLowerCase()==='fz'),
+    mxi:  d.head.findIndex(h=>h.toLowerCase().includes('torsion')||h.toLowerCase()==='mx'),
+    myii: d.head.findIndex(h=>h.toLowerCase().includes('moment-y')||h.toLowerCase()==='my'),
+    mzii: d.head.findIndex(h=>h.toLowerCase().includes('moment-z')||h.toLowerCase()==='mz')
+  };
+}
+
+// ── Internal Force (Axial Force Fx) ──
+function renderMember(lc) {
+  const f=getForceRows(lc); if(!f) return;
+  const {d,all,use,exi,axli,shyi,shzi}=f;
+  const maxAxl=Math.max(...use.map(r=>Math.abs(parseFloat(r[axli])||0)));
+  const minAxl=Math.min(...use.map(r=>parseFloat(r[axli])||0));
+  const maxAxlV=Math.max(...use.map(r=>parseFloat(r[axli])||0));
+  const n=use.length;
+  document.getElementById('statMember').innerHTML=`
+    <div class="stat-card"><div class="stat-val">${fmt(maxAxlV)}</div><div class="stat-lbl">Max Fx (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(minAxl)}</div><div class="stat-lbl">Min Fx (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxAxl)}</div><div class="stat-lbl">Max |Fx| (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${n}</div><div class="stat-lbl">Member count</div></div>`;
+  const top20=[...use].sort((a,b)=>Math.abs(parseFloat(b[axli])||0)-Math.abs(parseFloat(a[axli])||0)).slice(0,20);
+  const elems=top20.map(r=>String(r[exi])), fxs=top20.map(r=>parseFloat(r[axli])||0);
+  Plotly.newPlot('chart-member',[{type:'bar',x:elems,y:fxs,marker:{color:fxs.map(v=>v>=0?'#4361ee':'#ff6b6b')},name:'Fx (N)'}],
+    {title:{text:t('chartAxial'),font:{size:13}},xaxis:{title:t('xaxisElem'),type:'category'},yaxis:{title:'Fx (N)'},margin:{t:40,b:50,l:80,r:20},height:300,paper_bgcolor:'#fafafa',plot_bgcolor:'#fafafa'},{responsive:true});
+  renderTable('table-member', d.head, all, [axli,shyi,shzi].filter(i=>i>=0));
+}
+
+// ── Shear Force ──
+function renderShear(lc) {
+  const f=getForceRows(lc); if(!f) return;
+  const {d,all,use,exi,shyi,shzi}=f;
+  const maxFy=Math.max(...use.map(r=>Math.abs(parseFloat(r[shyi])||0)));
+  const maxFz=Math.max(...use.map(r=>Math.abs(parseFloat(r[shzi])||0)));
+  const maxSh=Math.max(maxFy,maxFz);
+  document.getElementById('statShear').innerHTML=`
+    <div class="stat-card"><div class="stat-val">${fmt(maxFy)}</div><div class="stat-lbl">Max |Fy| (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxFz)}</div><div class="stat-lbl">Max |Fz| (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxSh)}</div><div class="stat-lbl">Max shear resultant (N)</div></div>
+    <div class="stat-card"><div class="stat-val">${use.length}</div><div class="stat-lbl">Member count</div></div>`;
+  const top20=[...use].sort((a,b)=>Math.abs(parseFloat(b[shyi])||0)-Math.abs(parseFloat(a[shyi])||0)).slice(0,20);
+  const elems=top20.map(r=>String(r[exi]));
+  Plotly.newPlot('chart-shear',[
+    {type:'bar',name:'Fy (N)',x:elems,y:top20.map(r=>parseFloat(r[shyi])||0),marker:{color:'#2ec4b6'}},
+    {type:'bar',name:'Fz (N)',x:elems,y:top20.map(r=>parseFloat(r[shzi])||0),marker:{color:'#ff6b6b'}}
+  ],{title:{text:t('chartShear'),font:{size:13}},xaxis:{title:t('xaxisElem'),type:'category'},yaxis:{title:t('yaxisShear')},barmode:'group',margin:{t:40,b:50,l:80,r:20},height:300,paper_bgcolor:'#fafafa',plot_bgcolor:'#fafafa',legend:{x:0,y:1}},{responsive:true});
+  renderTable('table-shear', d.head, all, [shyi,shzi].filter(i=>i>=0));
+}
+
+// ── Bending Moment ──
+function renderMoment(lc) {
+  const f=getForceRows(lc); if(!f) return;
+  const {d,all,use,exi,myii,mzii}=f;
+  const maxMy=Math.max(...use.map(r=>Math.abs(parseFloat(r[myii])||0)));
+  const maxMz=Math.max(...use.map(r=>Math.abs(parseFloat(r[mzii])||0)));
+  document.getElementById('statMoment').innerHTML=`
+    <div class="stat-card"><div class="stat-val">${fmt(maxMy)}</div><div class="stat-lbl">Max |My| (N·mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxMz)}</div><div class="stat-lbl">Max |Mz| (N·mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(Math.max(maxMy,maxMz))}</div><div class="stat-lbl">Max |M| (N·mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${use.length}</div><div class="stat-lbl">Member count</div></div>`;
+  const top20=[...use].sort((a,b)=>Math.abs(parseFloat(b[mzii])||0)-Math.abs(parseFloat(a[mzii])||0)).slice(0,20);
+  const elems=top20.map(r=>String(r[exi]));
+  Plotly.newPlot('chart-moment',[
+    {type:'bar',name:'My (N·mm)',x:elems,y:top20.map(r=>parseFloat(r[myii])||0),marker:{color:'#7c3aed'}},
+    {type:'bar',name:'Mz (N·mm)',x:elems,y:top20.map(r=>parseFloat(r[mzii])||0),marker:{color:'#4361ee'}}
+  ],{title:{text:t('chartMoment'),font:{size:13}},xaxis:{title:t('xaxisElem'),type:'category'},yaxis:{title:t('yaxisMoment')},barmode:'group',margin:{t:40,b:50,l:80,r:20},height:300,paper_bgcolor:'#fafafa',plot_bgcolor:'#fafafa',legend:{x:0,y:1}},{responsive:true});
+  renderTable('table-moment', d.head, all, [myii,mzii].filter(i=>i>=0));
+}
+
+// ── Torsion ──
+function renderTorsion(lc) {
+  const f=getForceRows(lc); if(!f) return;
+  const {d,all,use,exi,mxi}=f;
+  if(mxi<0){ document.getElementById('statTorsion').innerHTML='<div class="stat-card" style="grid-column:1/-1"><div class="stat-lbl">No torsion data (Mx)</div></div>'; return; }
+  const maxMx=Math.max(...use.map(r=>Math.abs(parseFloat(r[mxi])||0)));
+  const minMx=Math.min(...use.map(r=>parseFloat(r[mxi])||0));
+  const maxMxV=Math.max(...use.map(r=>parseFloat(r[mxi])||0));
+  document.getElementById('statTorsion').innerHTML=`
+    <div class="stat-card"><div class="stat-val">${fmt(maxMxV)}</div><div class="stat-lbl">Max Mx (N·mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(minMx)}</div><div class="stat-lbl">Min Mx (N·mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(maxMx)}</div><div class="stat-lbl">Max |Mx| (N·mm)</div></div>
+    <div class="stat-card"><div class="stat-val">${use.length}</div><div class="stat-lbl">Member count</div></div>`;
+  const top20=[...use].sort((a,b)=>Math.abs(parseFloat(b[mxi])||0)-Math.abs(parseFloat(a[mxi])||0)).slice(0,20);
+  const elems=top20.map(r=>String(r[exi])), mxs=top20.map(r=>parseFloat(r[mxi])||0);
+  Plotly.newPlot('chart-torsion',[{type:'bar',x:elems,y:mxs,marker:{color:mxs.map(v=>v>=0?'#f59e0b':'#ef4444')},name:'Mx (N·mm)'}],
+    {title:{text:t('chartTorsion'),font:{size:13}},xaxis:{title:t('xaxisElem'),type:'category'},yaxis:{title:'Mx (N·mm)'},margin:{t:40,b:50,l:80,r:20},height:300,paper_bgcolor:'#fafafa',plot_bgcolor:'#fafafa'},{responsive:true});
+  renderTable('table-torsion', d.head, all, [mxi]);
+}
+
+// ── Stress Ratio / DCR ──
+function renderStress(lc) {
+  const d=analysisData.stress;
+  if(!d) {
+    document.getElementById('statStress').innerHTML='<div class="stat-card" style="grid-column:1/-1"><div class="stat-lbl">No stress ratio data (design check not run or not supported)</div></div>';
+    document.getElementById('chart-stress').innerHTML='';
+    document.getElementById('table-stress').innerHTML='';
+    return;
+  }
+  const rows=d.data.filter(r=>String(r[1])===lc||String(r[colIdx(d.head,'load')])===lc);
+  const use=rows.length===0?d.data:rows;
+  const exi=colIdx(d.head,'Elem')<0?0:colIdx(d.head,'Elem');
+  const numCols=d.head.map((_,i)=>i).filter(i=>i>1);
+
+  // Auto-detect max stress column (prefer columns containing ratio, dcr, stress)
+  const ratioI=d.head.findIndex(h=>/ratio|dcr|sr/i.test(h));
+  const dispI=ratioI>=0?ratioI:d.head.length-1;
+
+  const vals=use.map(r=>parseFloat(r[dispI])||0);
+  const maxV=Math.max(...vals), avgV=vals.reduce((a,b)=>a+b,0)/Math.max(vals.length,1);
+  const over1=vals.filter(v=>v>1.0).length;
+  document.getElementById('statStress').innerHTML=`
+    <div class="stat-card"><div class="stat-val ${maxV>1?'hi-pos':''}">${fmt(maxV)}</div><div class="stat-lbl">${t('statMaxStress')}</div></div>
+    <div class="stat-card"><div class="stat-val">${fmt(avgV)}</div><div class="stat-lbl">${t('statAvgStress')}</div></div>
+    <div class="stat-card"><div class="stat-val ${over1>0?'hi-pos':''}">${over1}</div><div class="stat-lbl">${t('statOverStress')}</div></div>
+    <div class="stat-card"><div class="stat-val">${use.length}</div><div class="stat-lbl">${t('statTotalMember')}</div></div>`;
+
+  const top20=[...use].sort((a,b)=>(parseFloat(b[dispI])||0)-(parseFloat(a[dispI])||0)).slice(0,20);
+  const elems=top20.map(r=>String(r[exi])), sv=top20.map(r=>parseFloat(r[dispI])||0);
+  Plotly.newPlot('chart-stress',[{type:'bar',x:elems,y:sv,marker:{color:sv.map(v=>v>1?'#ef4444':v>0.8?'#f59e0b':'#2ec4b6')},name:t('stressName')}],
+    {title:{text:t('chartStress'),font:{size:13}},xaxis:{title:t('xaxisElem'),type:'category'},yaxis:{title:t('yaxisStress'),range:[0,Math.max(1.2,...sv)*1.05]},shapes:[{type:'line',x0:-0.5,x1:top20.length-0.5,y0:1,y1:1,line:{color:'red',width:2,dash:'dash'}}],margin:{t:40,b:50,l:70,r:20},height:300,paper_bgcolor:'#fafafa',plot_bgcolor:'#fafafa'},{responsive:true});
+  renderTable('table-stress', d.head, use, numCols);
+}
+
+// ── Common table rendering ──
+function renderTable(tableId, head, data, numCols) {
+  const numSet=new Set(numCols);
+  let html=`<thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+  for(const row of data) {
+    html+=`<tr>${row.map((c,i)=>{
+      if(numSet.has(i)) { const cl=fmtClass(c); return `<td class="${cl}">${fmt(c)}</td>`; }
+      return `<td>${c}</td>`;
+    }).join('')}</tr>`;
+  }
+  html+='</tbody>';
+  document.getElementById(tableId).innerHTML=html;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Utils
+// ──────────────────────────────────────────────────────────────
+function goTo(step) {
+  for(let i=1;i<=9;i++){
+    document.getElementById(`page${i}`).classList.add('hidden');
+    const si=document.getElementById(`s${i}`);
+    si.classList.remove('active','done');
+    if(i<step) si.classList.add('done');
+  }
+  document.getElementById(`page${step}`).classList.remove('hidden');
+  document.getElementById(`s${step}`).classList.add('active');
+  if(step===6) renderPlot();
+  if(step===9) {
+    const genImg = document.querySelector('#prodGen img.prod-icon');
+    const civImg = document.querySelector('#prodCivil img.prod-icon');
+    if(genImg) document.getElementById('tf-img-gen').src = genImg.src;
+    if(civImg) document.getElementById('tf-img-civil').src = civImg.src;
+    const btns = document.getElementById('page9Btns');
+    btns.innerHTML = apiConnected
+      ? `<button class="btn btn-secondary" onclick="goTo(8)" data-i18n="backBtn">← Back</button>
+         <button class="btn btn-secondary" onclick="resetAll()" data-i18n="startOverBtn">🔄 Start Over</button>`
+      : `<button class="btn btn-secondary" onclick="resetAll()" data-i18n="startOverBtn">🔄 Start Over</button>`;
+  }
+}
+
+function resetAll() {
+  document.getElementById('logBox').innerHTML=`<span style="color:#f8c94f">${t('logInit')}</span>`; document.getElementById('logBox').dataset.initial='1';
+  document.getElementById('progressWrap').classList.add('hidden');
+  document.getElementById('progressBar').style.width='0%';
+  document.getElementById('fitNotice').classList.add('hidden');
+  document.getElementById('genBtn').disabled=false;
+  document.getElementById('toAnalBtn').disabled=true;
+  document.getElementById('resultCard').classList.add('hidden');
+  document.getElementById('analysisLog').innerHTML=`<span style="color:#f8c94f">${t('alogInit')}</span>`; document.getElementById('analysisLog').dataset.initial='1';
+  setBadge('wait');
+  analysisData={react:null,disp:null,force:null,stress:null};
+  selectedProduct=null;
+  apiConnected=false;
+  document.getElementById('prodGen').classList.remove('selected');
+  document.getElementById('prodCivil').classList.remove('selected');
+  goTo(1);
+}
+
+function toggleKey() {
+  const inp=document.getElementById('mapiKey');
+  inp.type=inp.type==='password'?'text':'password';
+}
+
+// ── Language init ──────────────────────────────────────────────
+(function(){
+  let saved='ko';
+  try{saved=localStorage.getItem('wizLang')||'ko';}catch(e){}
+  setLang(saved);
+  addLC();
+})();
+</script>
+</body>
+</html>
