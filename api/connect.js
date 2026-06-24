@@ -33,11 +33,15 @@ module.exports = async function handler(req, res) {
     if (r.ok && data && data.keyVerified === true && data.status === 'connected') {
       return res.json({ ok: true, program: data.program, user: data.user });
     }
-    // 제품 불일치 안내 (gen 선택했는데 키는 civil 인 경우 등)
-    if (data && data.program && data.program !== product) {
-      return res.json({ ok: false, error: `제품 불일치: 키는 '${data.program}' 용 (선택: '${product}')` });
+    // 키는 유효하지만 제품이 연결돼 있지 않음 — 가장 흔한 케이스
+    if (data && data.keyVerified === true && data.status === 'disconnected') {
+      return res.json({ ok: false, code: 'disconnected', program: data.program });
     }
-    return res.json({ ok: false, error: `HTTP ${r.status}${data && data.status ? ` (${data.status})` : ''}` });
+    // 제품 불일치 (gen 선택했는데 키는 civil 인 경우 등)
+    if (data && data.program && data.program !== product) {
+      return res.json({ ok: false, code: 'mismatch', program: data.program });
+    }
+    return res.json({ ok: false, code: 'http', httpStatus: r.status, status: data && data.status });
   } catch (e) {
     return res.json({ ok: false, error: e.message });
   }

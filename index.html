@@ -698,7 +698,9 @@ ko:{
   showHideKey:'키 보기/숨기기',testConn:'연결 테스트 →',backBtn:'← 이전',
   enterBothAlert:'MAPI Key를 입력하세요.',testingConn:'연결 테스트 중...',
   connSuccess:'✅ 연결 성공! 다음 단계로 이동합니다.',
-  connFail:'❌ 연결 실패 (HTTP {status}). URL과 Key를 확인하세요.',
+  connFail:'❌ 연결 확인 실패: {status}',
+  connDisconnected:'❌ {prog} 프로그램이 실행/연결되어 있지 않습니다. 프로그램을 켠 뒤 다시 시도하세요. (키는 정상)',
+  connMismatch:'❌ 제품 불일치: 이 키는 {key} 용입니다 (현재 선택: {sel}). 제품 선택을 바꾸세요.',
   connError:'❌ 연결 오류: {msg}',
   step3H2:'📐 구조물 파라미터',secSize:'구조물 크기',lblRadius:'반경 (mm)',
   lblCx:'중심 X (mm)',lblCy:'중심 Y (mm)',lblCz:'중심 Z (mm)',
@@ -822,7 +824,9 @@ en:{
   showHideKey:'Show/Hide Key',testConn:'Test Connection →',backBtn:'← Back',
   enterBothAlert:'Please enter your MAPI Key.',testingConn:'Testing connection...',
   connSuccess:'✅ Connection successful! Proceeding to next step.',
-  connFail:'❌ Connection failed (HTTP {status}). Please check your URL and Key.',
+  connFail:'❌ Connection check failed: {status}',
+  connDisconnected:'❌ {prog} is not running / connected. Launch the program and try again. (Key is valid)',
+  connMismatch:'❌ Product mismatch: this key is for {key} (currently selected: {sel}). Change the product selection.',
   connError:'❌ Connection error: {msg}',
   step3H2:'📐 Structure Parameters',secSize:'Structure Size',lblRadius:'Radius (mm)',
   lblCx:'Center X (mm)',lblCy:'Center Y (mm)',lblCz:'Center Z (mm)',
@@ -945,7 +949,9 @@ tc:{
   showHideKey:'顯示/隱藏金鑰',testConn:'連線測試 →',backBtn:'← 上一步',
   enterBothAlert:'請輸入您的 MAPI Key。',testingConn:'連線測試中...',
   connSuccess:'✅ 連線成功！即將進入下一步。',
-  connFail:'❌ 連線失敗（HTTP {status}）。請確認 URL 與 Key 是否正確。',
+  connFail:'❌ 連線確認失敗：{status}',
+  connDisconnected:'❌ {prog} 程式未啟動／未連線。請開啟程式後再試一次。（金鑰正常）',
+  connMismatch:'❌ 產品不符：此金鑰為 {key} 用（目前選擇：{sel}）。請更改產品選擇。',
   connError:'❌ 連線錯誤：{msg}',
   step3H2:'📐 結構參數',secSize:'結構尺寸',lblRadius:'半徑 (mm)',
   lblCx:'中心 X (mm)',lblCy:'中心 Y (mm)',lblCz:'中心 Z (mm)',
@@ -1042,8 +1048,8 @@ tc:{
 // 버전 관리 — 여기 2줄만 고치면 헤더의 모든 언어에 자동 반영됨.
 // (i18n 문자열의 {ver}/{date} 토큰을 setLang 에서 치환)
 // ──────────────────────────────────────────────────────────────
-const APP_VERSION = '260624';     // YYMMDD
-const APP_UPDATED = '2026-06-24'; // 최신 업데이트 날짜
+const APP_VERSION = '260625';     // YYMMDD
+const APP_UPDATED = '2026-06-25'; // 최신 업데이트 날짜
 function fillTokens(s){ return s.replace(/\{ver\}/g, APP_VERSION).replace(/\{date\}/g, APP_UPDATED); }
 
 let currentLang = 'ko';
@@ -1235,7 +1241,14 @@ async function testConn() {
     });
     const data = await r.json();
     if (data.ok) { apiConnected=true; showAlert('connAlert','success',t('connSuccess')); setTimeout(()=>goTo(3),800); }
-    else          showAlert('connAlert','error',t('connFail').replace('{status}', data.error||'unknown'));
+    else {
+      const prog = data.program === 'civil' ? 'Civil NX' : 'Gen NX';
+      let msg;
+      if (data.code === 'disconnected') msg = t('connDisconnected').replace('{prog}', prog);
+      else if (data.code === 'mismatch') msg = t('connMismatch').replace('{key}', prog).replace('{sel}', selectedProduct === 'civil' ? 'Civil NX' : 'Gen NX');
+      else msg = t('connFail').replace('{status}', data.error || `HTTP ${data.httpStatus||'?'}${data.status?` (${data.status})`:''}`);
+      showAlert('connAlert','error', msg);
+    }
   } catch(e) { showAlert('connAlert','error',t('connError').replace('{msg}',e.message)); }
 }
 

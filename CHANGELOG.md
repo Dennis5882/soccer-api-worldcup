@@ -6,10 +6,12 @@
 [index.html](index.html)의 `APP_VERSION` / `APP_UPDATED` 상수 **한 곳**에서 관리합니다.
 버전을 올릴 때는 그 두 상수를 수정하고, 아래에 항목을 추가하세요.
 
-## V260624 (2026-06-24)
+## V260625 (2026-06-25)
 - 버전·업데이트 날짜를 헤더에 함께 표시, 단일 상수(`APP_VERSION`/`APP_UPDATED`)로 일원화
 - API 연결 단계에 **Base URL 입력칸** 추가 — 제품(Gen/Civil) 기본값 자동 채움 + 수정 가능
-- 연결 테스트를 `/mapikey/verify` 방식으로 교체 (`keyVerified:true` 기준), 제품 불일치 안내 추가
+- 연결 테스트를 `/mapikey/verify` 방식으로 교체 (`keyVerified:true` 기준)
+- 연결 실패 원인을 코드(`disconnected`/`mismatch`/`http`)로 구분해 언어별 안내 메시지 표시
+  (제품 미실행, 제품 불일치 등) — "HTTP HTTP" 중복 표기 제거
 - 백엔드 호출을 상대경로로 전환 (Vercel 프로젝트명 변경에 영향 없음, CORS 불필요)
 
 ## V260509 (2026-05-09)
