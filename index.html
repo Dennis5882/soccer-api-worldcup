@@ -213,7 +213,7 @@ input:focus,select:focus{outline:none;border-color:#4361ee;box-shadow:0 0 0 3px 
   <div class="logo">⚽</div>
   <div>
     <h1 data-i18n="headerH1">Experience the Latest MIDAS API Technology with the 2026 World Cup</h1>
-    <div class="meta" data-i18n-html="headerMeta">Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; V260509</div>
+    <div class="meta" data-i18n-html="headerMeta">Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; V260624 (Updated 2026-06-24)</div>
   </div>
   <div class="lang-sw">
     <button class="lang-btn active" id="langKo" onclick="setLang('ko')">한국어</button>
@@ -670,7 +670,7 @@ const STRINGS = {
 ko:{
   pageTitle:'북중미 월드컵과 함께하는 MIDAS API 최신 기술 체험하기',
   headerH1:'북중미 월드컵과 함께하는 MIDAS API 최신 기술 체험하기',
-  headerMeta:'절단 정이십면체(축구공) 구조물 자동 생성 &nbsp;·&nbsp; 개발자: Dennis &nbsp;·&nbsp; V260509',
+  headerMeta:'절단 정이십면체(축구공) 구조물 자동 생성 &nbsp;·&nbsp; 개발자: Dennis &nbsp;·&nbsp; V{ver} ({date} 업데이트)',
   step1:'제품 선택',step2:'API 연결',step3:'파라미터',step4:'경계 조건',step5:'하중',
   step6:'3D 미리보기',step7:'모델 생성',step8:'해석',step9:'무료체험신청',
   sidebarEyebrow:'MIDAS API Experience',
@@ -794,7 +794,7 @@ ko:{
 en:{
   pageTitle:'Experience the Latest MIDAS API Technology with the 2026 World Cup',
   headerH1:'Experience the Latest MIDAS API Technology with the 2026 World Cup',
-  headerMeta:'Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; V260509',
+  headerMeta:'Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; V{ver} (Updated {date})',
   step1:'Product',step2:'API Connect',step3:'Parameters',step4:'Boundary',step5:'Loads',
   step6:'3D Preview',step7:'Generate',step8:'Analysis',step9:'Free Trial',
   sidebarEyebrow:'MIDAS API Experience',
@@ -917,7 +917,7 @@ en:{
 tc:{
   pageTitle:'與2026北中美世界盃一起體驗MIDAS API最新技術',
   headerH1:'與2026北中美世界盃一起體驗MIDAS API最新技術',
-  headerMeta:'截角二十面體（足球）結構自動生成 &nbsp;·&nbsp; 開發者：Dennis &nbsp;·&nbsp; V260509',
+  headerMeta:'截角二十面體（足球）結構自動生成 &nbsp;·&nbsp; 開發者：Dennis &nbsp;·&nbsp; V{ver} ({date} 更新)',
   step1:'選擇產品',step2:'API連線',step3:'參數設定',step4:'邊界條件',step5:'載重設定',
   step6:'3D預覽',step7:'建立模型',step8:'分析',step9:'免費試用',
   sidebarEyebrow:'MIDAS API 體驗',
@@ -1038,6 +1038,14 @@ tc:{
 }
 };
 
+// ──────────────────────────────────────────────────────────────
+// 버전 관리 — 여기 2줄만 고치면 헤더의 모든 언어에 자동 반영됨.
+// (i18n 문자열의 {ver}/{date} 토큰을 setLang 에서 치환)
+// ──────────────────────────────────────────────────────────────
+const APP_VERSION = '260624';     // YYMMDD
+const APP_UPDATED = '2026-06-24'; // 최신 업데이트 날짜
+function fillTokens(s){ return s.replace(/\{ver\}/g, APP_VERSION).replace(/\{date\}/g, APP_UPDATED); }
+
 let currentLang = 'ko';
 function t(key){ return (STRINGS[currentLang]||{})[key] || (STRINGS.en||{})[key] || key; }
 
@@ -1048,8 +1056,8 @@ function setLang(lang) {
   document.documentElement.lang = lang==='ko'?'ko':lang==='tc'?'zh-TW':'en';
   document.title = t('pageTitle');
   // Update all tagged elements
-  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
-  document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = fillTokens(t(el.dataset.i18n)); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = fillTokens(t(el.dataset.i18nHtml)); });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
   // Language button state
   ['langKo','langEn','langTc'].forEach(id => document.getElementById(id)?.classList.remove('active'));
