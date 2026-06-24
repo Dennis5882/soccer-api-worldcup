@@ -20,8 +20,8 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST')   return res.status(405).end();
 
-  const { product, apiKey } = req.body || {};
-  const base = MIDAS_BASE[product];
+  const { product, apiKey, baseUrl } = req.body || {};
+  const base = (baseUrl || '').trim().replace(/\/$/, '') || MIDAS_BASE[product];
   const key = (apiKey || '').trim();
   if (!base || !key) return res.status(400).json({ ok: false, error: 'Missing product or apiKey' });
 
