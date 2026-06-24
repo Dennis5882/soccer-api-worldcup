@@ -1197,7 +1197,7 @@ const BACKEND_URL = '';
 // STEP 2: Connection test (via backend)
 // ──────────────────────────────────────────────────────────────
 async function testConn() {
-  const key = document.getElementById('mapiKey').value;
+  const key = document.getElementById('mapiKey').value.trim();
   if (!key) { showAlert('connAlert','error',t('enterBothAlert')); return; }
   showAlert('connAlert','info',t('testingConn'));
   try {

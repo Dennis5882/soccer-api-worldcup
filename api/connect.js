@@ -3,6 +3,12 @@ const MIDAS_BASE = {
   civil: 'https://moa-engineers.midasit.com:443/civil'
 };
 
+// 연결 검증은 product 접두어를 뗀 루트의 /mapikey/verify (GET) 가 정석.
+// (story/MAPI_FINDINGS.md 라이브 검증 결과 — keyVerified:true 가 성공 기준)
+function mapiRoot(base) {
+  return base.replace(/\/(gen|civil)\/?$/i, '');
+}
+
 function setCors(res) {
   res.setHeader('Access-Control-Allow-Origin',  '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -16,12 +22,22 @@ module.exports = async function handler(req, res) {
 
   const { product, apiKey } = req.body || {};
   const base = MIDAS_BASE[product];
-  if (!base || !apiKey) return res.status(400).json({ ok: false, error: 'Missing product or apiKey' });
+  const key = (apiKey || '').trim();
+  if (!base || !key) return res.status(400).json({ ok: false, error: 'Missing product or apiKey' });
 
   try {
-    const r = await fetch(`${base}/db/node`, { headers: { 'MAPI-Key': apiKey } });
-    if (r.ok) return res.json({ ok: true });
-    return res.json({ ok: false, error: `HTTP ${r.status}` });
+    const r = await fetch(`${mapiRoot(base)}/mapikey/verify`, { headers: { 'MAPI-Key': key } });
+    let data = null;
+    try { data = await r.json(); } catch (_) {}
+
+    if (r.ok && data && data.keyVerified === true && data.status === 'connected') {
+      return res.json({ ok: true, program: data.program, user: data.user });
+    }
+    // 제품 불일치 안내 (gen 선택했는데 키는 civil 인 경우 등)
+    if (data && data.program && data.program !== product) {
+      return res.json({ ok: false, error: `제품 불일치: 키는 '${data.program}' 용 (선택: '${product}')` });
+    }
+    return res.json({ ok: false, error: `HTTP ${r.status}${data && data.status ? ` (${data.status})` : ''}` });
   } catch (e) {
     return res.json({ ok: false, error: e.message });
   }
