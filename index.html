@@ -1188,9 +1188,10 @@ function bottomNodeIndices(verts, tol=0.05) {
 }
 
 // ──────────────────────────────────────────────────────────────
-// Backend URL — update after Vercel deployment
+// Backend URL — 프론트/백엔드가 같은 Vercel 프로젝트이므로 상대경로 사용
+// (도메인 이름이 바뀌어도 영향 없음, CORS 불필요)
 // ──────────────────────────────────────────────────────────────
-const BACKEND_URL = 'https://soccer-back-end.vercel.app';
+const BACKEND_URL = '';
 
 // ──────────────────────────────────────────────────────────────
 // STEP 2: Connection test (via backend)
