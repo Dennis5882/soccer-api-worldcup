@@ -47,7 +47,9 @@ function bottomNodeIndices(verts, radius, tol=0.05) {
 
 // ── MIDAS API helper ────────────────────────────────────────────
 async function midas(base, key, method, ep, body) {
-  const res = await fetch(`${base}/db/${ep}`, {
+  // ep 앞에 '/'가 있으면 절대경로(예: /doc/new), 없으면 db 테이블(/db/<ep>)
+  const url = ep.startsWith('/') ? `${base}${ep}` : `${base}/db/${ep}`;
+  const res = await fetch(url, {
     method,
     headers: { 'MAPI-Key': key, 'Content-Type': 'application/json' },
     body: body ? JSON.stringify(body) : undefined
@@ -88,9 +90,14 @@ module.exports = async function handler(req, res) {
     const edges = soccerEdges(verts);
 
     // Clear existing model
+    // 항목별 DELETE(8회) 대신 doc/new 1회로 문서 전체를 초기화.
+    // → 각 DELETE가 유발하던 Gen NX 알림음("띵동")·"참조 중 삭제" 경고 제거.
+    //   단 doc/new는 단위를 리셋하므로 직후 단위(N, MM)를 재설정. (story 사례 참고)
     if (clearModel) {
-      for (const ep of ['cons','CNLD','BODF','stld','elem','node','sect','matl'])
-        await midas(base, apiKey, 'DELETE', ep);
+      await midas(base, apiKey, 'POST', '/doc/new', {});
+      await midas(base, apiKey, 'PUT', 'unit', {
+        Assign: { 1: { FORCE:'N', DIST:'MM', HEAT:'KJ', TEMPER:'C' } }
+      });
       log('Existing data cleared');
     }
 

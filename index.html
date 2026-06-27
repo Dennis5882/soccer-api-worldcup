@@ -217,7 +217,7 @@ input:focus,select:focus{outline:none;border-color:#4361ee;box-shadow:0 0 0 3px 
   <div class="logo">⚽</div>
   <div>
     <h1 data-i18n="headerH1">Experience the Latest MIDAS API Technology with the 2026 World Cup</h1>
-    <div class="meta" data-i18n-html="headerMeta">Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; V260624 (Updated 2026-06-24)</div>
+    <div class="meta" data-i18n-html="headerMeta">Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; v2.0.0 (Updated 2026-06-27)</div>
   </div>
   <div class="lang-sw" id="langSw"><!-- 언어 버튼은 LANGS 설정 기반으로 자동 생성됨 --></div>
 </header>
@@ -632,29 +632,29 @@ input:focus,select:focus{outline:none;border-color:#4361ee;box-shadow:0 0 0 3px 
   <aside class="col-right">
     <div class="ip-right">
       <div class="ip-eyebrow" data-i18n="wcEyebrow">FIFA World Cup 2026 · North America</div>
-      <h2 data-i18n-html="wcH2">🏆 Opening Ceremony &amp; First Match</h2>
+      <h2 data-i18n-html="wcH2">🏆 Closing Ceremony &amp; Final</h2>
       <div class="wc-rows">
         <div class="wc-row">
           <div class="wr-icon">🎉</div>
           <div class="wr-info">
-            <div class="wr-label" data-i18n="wcLabel1">Opening Ceremony</div>
-            <div class="wr-date" data-i18n="wcDate1">June 11, 2026 (Thu)</div>
-            <div class="wr-kst" data-i18n="wcKst1">KST: Jun 12 (Fri) early morning</div>
+            <div class="wr-label" data-i18n="wcLabel1">Closing Ceremony</div>
+            <div class="wr-date" data-i18n="wcDate1">July 19, 2026 (Sun)</div>
+            <div class="wr-kst" data-i18n="wcKst1">Held right before the Final</div>
             <div class="wr-venue" data-i18n="wcVenue">MetLife Stadium, East Rutherford, NJ, USA</div>
           </div>
         </div>
         <div class="wc-row">
-          <div class="wr-icon">⚽</div>
+          <div class="wr-icon">🏆</div>
           <div class="wr-info">
-            <div class="wr-label" data-i18n="wcLabel2">Opening Match</div>
-            <div class="wr-date" data-i18n="wcDate2">Jun 12, 2026 (Fri) 09:00 KST</div>
-            <div class="wr-kst" data-i18n="wcKst2">Local: Jun 11 (Thu) 20:00 ET</div>
+            <div class="wr-label" data-i18n="wcLabel2">Final</div>
+            <div class="wr-date" data-i18n="wcDate2">Jul 20, 2026 (Mon) 04:00 KST</div>
+            <div class="wr-kst" data-i18n="wcKst2">Local: Jul 19 (Sun) 15:00 ET</div>
             <div class="wr-venue" data-i18n="wcVenue">MetLife Stadium, East Rutherford, NJ, USA</div>
           </div>
         </div>
       </div>
       <div class="wc-countdown-box">
-        <div class="cd-label" data-i18n="cdLabel">⏱ Time Until Kickoff (KST)</div>
+        <div class="cd-label" data-i18n="cdLabel">⏱ Time Until the Final (KST)</div>
         <div id="countdown-val" data-i18n="cdInit">Calculating...</div>
       </div>
     </div>
@@ -670,7 +670,7 @@ const STRINGS = {
 ko:{
   pageTitle:'북중미 월드컵과 함께하는 MIDAS API 최신 기술 체험하기',
   headerH1:'북중미 월드컵과 함께하는 MIDAS API 최신 기술 체험하기',
-  headerMeta:'절단 정이십면체(축구공) 구조물 자동 생성 &nbsp;·&nbsp; 개발자: Dennis &nbsp;·&nbsp; V{ver} ({date} 업데이트)',
+  headerMeta:'절단 정이십면체(축구공) 구조물 자동 생성 &nbsp;·&nbsp; 개발자: Dennis &nbsp;·&nbsp; v{ver} ({date} 업데이트)',
   step1:'제품 선택',step2:'API 연결',step3:'파라미터',step4:'경계 조건',step5:'하중',
   step6:'3D 미리보기',step7:'모델 생성',step8:'해석',step9:'무료체험신청',
   sidebarEyebrow:'MIDAS API Experience',
@@ -682,12 +682,12 @@ ko:{
   nudgeDesc:'지금 바로 무료체험판을 신청하고 API Key를 받아보세요!',
   nudgeBtn:'무료체험신청 →',
   wcEyebrow:'FIFA World Cup 2026 · 북중미',
-  wcH2:'🏆 개막식 &amp; 첫 경기 일정',
-  wcLabel1:'개막식 Opening Ceremony',wcDate1:'2026년 6월 12일 (금)',
-  wcKst1:'KST: 6월 12일 (금) 09:00',wcVenue:'MetLife Stadium, 미국 뉴저지 East Rutherford',
-  wcLabel2:'개막전 첫 경기',wcDate2:'2026년 6월 12일 (금) 09:00 KST',
-  wcKst2:'현지: 6월 11일 (목) 20:00 ET',
-  cdLabel:'⏱ 개막까지 남은 시간 (KST 기준)',cdInit:'계산 중...',cdKickoff:'개막!🎉',
+  wcH2:'🏆 폐막식 &amp; 결승전',
+  wcLabel1:'폐막식 Closing Ceremony',wcDate1:'2026년 7월 19일 (일)',
+  wcKst1:'결승전 직전 진행',wcVenue:'MetLife Stadium, 미국 뉴저지 East Rutherford',
+  wcLabel2:'결승전 Final',wcDate2:'2026년 7월 20일 (월) 04:00 KST',
+  wcKst2:'현지: 7월 19일 (일) 15:00 ET',
+  cdLabel:'⏱ 결승전까지 남은 시간 (KST 기준)',cdInit:'계산 중...',cdKickoff:'결승 킥오프!🎉',
   step1H2:'🎯 제품 선택',step1Desc:'축구공 구조물을 생성할 MIDAS 소프트웨어를 선택하세요.',
   genNXDesc:'건축 구조 전문 해석 소프트웨어<br>비선형 · 내진 · 성능 기반 설계<br>API 기반 자동화 워크플로우',
   genNXBadge:'건축 구조',
@@ -796,7 +796,7 @@ ko:{
 en:{
   pageTitle:'Experience the Latest MIDAS API Technology with the 2026 World Cup',
   headerH1:'Experience the Latest MIDAS API Technology with the 2026 World Cup',
-  headerMeta:'Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; V{ver} (Updated {date})',
+  headerMeta:'Automated Truncated Icosahedron Structure Generation &nbsp;·&nbsp; Developer: Dennis &nbsp;·&nbsp; v{ver} (Updated {date})',
   step1:'Product',step2:'API Connect',step3:'Parameters',step4:'Boundary',step5:'Loads',
   step6:'3D Preview',step7:'Generate',step8:'Analysis',step9:'Free Trial',
   sidebarEyebrow:'MIDAS API Experience',
@@ -808,12 +808,12 @@ en:{
   nudgeDesc:'Sign up for a free trial now and get your API Key instantly!',
   nudgeBtn:'Free Trial →',
   wcEyebrow:'FIFA World Cup 2026 · North America',
-  wcH2:'🏆 Opening Ceremony &amp; First Match',
-  wcLabel1:'Opening Ceremony',wcDate1:'June 11, 2026 (Thu)',
-  wcKst1:'KST: Jun 12 (Fri) early morning',wcVenue:'MetLife Stadium, East Rutherford, NJ, USA',
-  wcLabel2:'Opening Match',wcDate2:'Jun 12, 2026 (Fri) 09:00 KST',
-  wcKst2:'Local: Jun 11 (Thu) 20:00 ET',
-  cdLabel:'⏱ Time Until Kickoff (KST)',cdInit:'Calculating...',cdKickoff:'KICKOFF!🎉',
+  wcH2:'🏆 Closing Ceremony &amp; Final',
+  wcLabel1:'Closing Ceremony',wcDate1:'July 19, 2026 (Sun)',
+  wcKst1:'Held right before the Final',wcVenue:'MetLife Stadium, East Rutherford, NJ, USA',
+  wcLabel2:'Final',wcDate2:'Jul 20, 2026 (Mon) 04:00 KST',
+  wcKst2:'Local: Jul 19 (Sun) 15:00 ET',
+  cdLabel:'⏱ Time Until the Final (KST)',cdInit:'Calculating...',cdKickoff:'FINAL KICKOFF!🎉',
   step1H2:'🎯 Select Your Software',step1Desc:'Select the MIDAS software to build your soccer ball structure.',
   genNXDesc:'Building Structural Analysis<br>Nonlinear &amp; Seismic Design<br>Performance-Based Design',
   genNXBadge:'Building Structure',
@@ -921,7 +921,7 @@ en:{
 tc:{
   pageTitle:'與2026北中美世界盃一起體驗MIDAS API最新技術',
   headerH1:'與2026北中美世界盃一起體驗MIDAS API最新技術',
-  headerMeta:'截角二十面體（足球）結構自動生成 &nbsp;·&nbsp; 開發者：Dennis &nbsp;·&nbsp; V{ver} ({date} 更新)',
+  headerMeta:'截角二十面體（足球）結構自動生成 &nbsp;·&nbsp; 開發者：Dennis &nbsp;·&nbsp; v{ver} ({date} 更新)',
   step1:'選擇產品',step2:'API連線',step3:'參數設定',step4:'邊界條件',step5:'載重設定',
   step6:'3D預覽',step7:'建立模型',step8:'分析',step9:'免費試用',
   sidebarEyebrow:'MIDAS API 體驗',
@@ -933,12 +933,12 @@ tc:{
   nudgeDesc:'立即申請免費試用，馬上取得您的 API Key！',
   nudgeBtn:'免費試用申請 →',
   wcEyebrow:'FIFA世界盃 2026 · 北中美',
-  wcH2:'🏆 開幕典禮 &amp; 首場比賽',
-  wcLabel1:'開幕典禮',wcDate1:'2026年6月11日（四）',
-  wcKst1:'台灣時間：6月12日（五）08:00 CST',wcVenue:'美國紐澤西州東盧瑟福 MetLife Stadium',
-  wcLabel2:'首場比賽',wcDate2:'2026年6月12日（五）08:00 CST',
-  wcKst2:'當地時間：6月11日（四）20:00 ET',
-  cdLabel:'⏱ 距開幕倒數（台灣時間 CST）',cdInit:'計算中...',cdKickoff:'開幕！🎉',
+  wcH2:'🏆 閉幕典禮 &amp; 決賽',
+  wcLabel1:'閉幕典禮',wcDate1:'2026年7月19日（日）',
+  wcKst1:'決賽前舉行',wcVenue:'美國紐澤西州東盧瑟福 MetLife Stadium',
+  wcLabel2:'決賽',wcDate2:'2026年7月20日（一）03:00 CST',
+  wcKst2:'當地時間：7月19日（日）15:00 ET',
+  cdLabel:'⏱ 距決賽倒數（台灣時間 CST）',cdInit:'計算中...',cdKickoff:'決賽開踢！🎉',
   step1H2:'🎯 選擇您的軟體',step1Desc:'請選擇要建立足球結構的 MIDAS 軟體。',
   genNXDesc:'建築結構專業分析軟體<br>非線性・耐震・性能設計<br>API 自動化工作流程',
   genNXBadge:'建築結構',
@@ -1045,7 +1045,7 @@ tc:{
 ja:{
   pageTitle:'2026 ワールドカップとともに体験する MIDAS API 最新技術',
   headerH1:'2026 ワールドカップとともに体験する MIDAS API 最新技術',
-  headerMeta:'切頂二十面体（サッカーボール）構造の自動生成 &nbsp;·&nbsp; 開発者：Dennis &nbsp;·&nbsp; V{ver} ({date} 更新)',
+  headerMeta:'切頂二十面体（サッカーボール）構造の自動生成 &nbsp;·&nbsp; 開発者：Dennis &nbsp;·&nbsp; v{ver} ({date} 更新)',
   step1:'製品選択',step2:'API接続',step3:'パラメータ',step4:'境界条件',step5:'荷重',
   step6:'3Dプレビュー',step7:'モデル生成',step8:'解析',step9:'無料体験',
   sidebarEyebrow:'MIDAS API 体験',
@@ -1057,12 +1057,12 @@ ja:{
   nudgeDesc:'今すぐ無料体験版を申し込んで API Key を取得しましょう！',
   nudgeBtn:'無料体験申込 →',
   wcEyebrow:'FIFA ワールドカップ 2026 · 北中米',
-  wcH2:'🏆 開会式 &amp; 開幕戦',
-  wcLabel1:'開会式',wcDate1:'2026年6月11日（木）',
-  wcKst1:'日本時間：6月12日（金）09:00 JST',wcVenue:'米国ニュージャージー州イーストラザフォード MetLife Stadium',
-  wcLabel2:'開幕戦',wcDate2:'2026年6月12日（金）09:00 JST',
-  wcKst2:'現地時間：6月11日（木）20:00 ET',
-  cdLabel:'⏱ 開幕までのカウントダウン（日本時間 JST）',cdInit:'計算中...',cdKickoff:'開幕！🎉',
+  wcH2:'🏆 閉会式 &amp; 決勝',
+  wcLabel1:'閉会式',wcDate1:'2026年7月19日（日）',
+  wcKst1:'決勝の直前に実施',wcVenue:'米国ニュージャージー州イーストラザフォード MetLife Stadium',
+  wcLabel2:'決勝',wcDate2:'2026年7月20日（月）04:00 JST',
+  wcKst2:'現地時間：7月19日（日）15:00 ET',
+  cdLabel:'⏱ 決勝までのカウントダウン（日本時間 JST）',cdInit:'計算中...',cdKickoff:'決勝キックオフ！🎉',
   step1H2:'🎯 ソフトウェアを選択',step1Desc:'サッカーボール構造を生成する MIDAS ソフトウェアを選択してください。',
   genNXDesc:'建築構造専門の解析ソフトウェア<br>非線形・耐震・性能設計<br>API ベースの自動化ワークフロー',
   genNXBadge:'建築構造',
@@ -1169,7 +1169,7 @@ ja:{
 sc:{
   pageTitle:'与2026北中美世界杯一起体验MIDAS API最新技术',
   headerH1:'与2026北中美世界杯一起体验MIDAS API最新技术',
-  headerMeta:'截角二十面体（足球）结构自动生成 &nbsp;·&nbsp; 开发者：Dennis &nbsp;·&nbsp; V{ver} ({date} 更新)',
+  headerMeta:'截角二十面体（足球）结构自动生成 &nbsp;·&nbsp; 开发者：Dennis &nbsp;·&nbsp; v{ver} ({date} 更新)',
   step1:'选择产品',step2:'API连接',step3:'参数设置',step4:'边界条件',step5:'荷载设置',
   step6:'3D预览',step7:'创建模型',step8:'分析',step9:'免费试用',
   sidebarEyebrow:'MIDAS API 体验',
@@ -1181,12 +1181,12 @@ sc:{
   nudgeDesc:'立即申请免费试用，马上获取您的 API Key！',
   nudgeBtn:'免费试用申请 →',
   wcEyebrow:'FIFA世界杯 2026 · 北中美',
-  wcH2:'🏆 开幕典礼 &amp; 首场比赛',
-  wcLabel1:'开幕典礼',wcDate1:'2026年6月11日（四）',
-  wcKst1:'北京时间：6月12日（五）08:00 CST',wcVenue:'美国新泽西州东卢瑟福 MetLife Stadium',
-  wcLabel2:'首场比赛',wcDate2:'2026年6月12日（五）08:00 CST',
-  wcKst2:'当地时间：6月11日（四）20:00 ET',
-  cdLabel:'⏱ 距开幕倒计时（北京时间 CST）',cdInit:'计算中...',cdKickoff:'开幕！🎉',
+  wcH2:'🏆 闭幕典礼 &amp; 决赛',
+  wcLabel1:'闭幕典礼',wcDate1:'2026年7月19日（日）',
+  wcKst1:'决赛前举行',wcVenue:'美国新泽西州东卢瑟福 MetLife Stadium',
+  wcLabel2:'决赛',wcDate2:'2026年7月20日（一）03:00 CST',
+  wcKst2:'当地时间：7月19日（日）15:00 ET',
+  cdLabel:'⏱ 距决赛倒计时（北京时间 CST）',cdInit:'计算中...',cdKickoff:'决赛开球！🎉',
   step1H2:'🎯 选择您的软件',step1Desc:'请选择要创建足球结构的 MIDAS 软件。',
   genNXDesc:'建筑结构专业分析软件<br>非线性・抗震・性能设计<br>API 自动化工作流程',
   genNXBadge:'建筑结构',
@@ -1293,7 +1293,7 @@ sc:{
 th:{
   pageTitle:'สัมผัสเทคโนโลยี MIDAS API ล่าสุดไปกับฟุตบอลโลก 2026',
   headerH1:'สัมผัสเทคโนโลยี MIDAS API ล่าสุดไปกับฟุตบอลโลก 2026',
-  headerMeta:'การสร้างโครงสร้างทรงตัดยี่สิบหน้า (ลูกฟุตบอล) อัตโนมัติ &nbsp;·&nbsp; ผู้พัฒนา: Dennis &nbsp;·&nbsp; V{ver} (อัปเดต {date})',
+  headerMeta:'การสร้างโครงสร้างทรงตัดยี่สิบหน้า (ลูกฟุตบอล) อัตโนมัติ &nbsp;·&nbsp; ผู้พัฒนา: Dennis &nbsp;·&nbsp; v{ver} (อัปเดต {date})',
   step1:'เลือกผลิตภัณฑ์',step2:'เชื่อมต่อ API',step3:'พารามิเตอร์',step4:'เงื่อนไขขอบเขต',step5:'น้ำหนักบรรทุก',
   step6:'ตัวอย่าง 3D',step7:'สร้างโมเดล',step8:'วิเคราะห์',step9:'ทดลองใช้ฟรี',
   sidebarEyebrow:'ประสบการณ์ MIDAS API',
@@ -1305,12 +1305,12 @@ th:{
   nudgeDesc:'สมัครทดลองใช้ฟรีตอนนี้แล้วรับ API Key ได้ทันที!',
   nudgeBtn:'สมัครทดลองใช้ฟรี →',
   wcEyebrow:'ฟุตบอลโลก FIFA 2026 · อเมริกาเหนือ-กลาง',
-  wcH2:'🏆 พิธีเปิด &amp; นัดแรก',
-  wcLabel1:'พิธีเปิด',wcDate1:'11 มิถุนายน 2026 (พฤ.)',
-  wcKst1:'เวลาไทย: 12 มิ.ย. (ศ.) 07:00 ICT',wcVenue:'MetLife Stadium, East Rutherford รัฐนิวเจอร์ซีย์ สหรัฐฯ',
-  wcLabel2:'นัดเปิดสนาม',wcDate2:'12 มิ.ย. 2026 (ศ.) 07:00 ICT',
-  wcKst2:'เวลาท้องถิ่น: 11 มิ.ย. (พฤ.) 20:00 ET',
-  cdLabel:'⏱ นับถอยหลังสู่พิธีเปิด (เวลาไทย ICT)',cdInit:'กำลังคำนวณ...',cdKickoff:'เปิดฉาก!🎉',
+  wcH2:'🏆 พิธีปิด &amp; รอบชิงชนะเลิศ',
+  wcLabel1:'พิธีปิด',wcDate1:'19 กรกฎาคม 2026 (อา.)',
+  wcKst1:'จัดก่อนรอบชิงชนะเลิศ',wcVenue:'MetLife Stadium, East Rutherford รัฐนิวเจอร์ซีย์ สหรัฐฯ',
+  wcLabel2:'รอบชิงชนะเลิศ',wcDate2:'20 ก.ค. 2026 (จ.) 02:00 ICT',
+  wcKst2:'เวลาท้องถิ่น: 19 ก.ค. (อา.) 15:00 ET',
+  cdLabel:'⏱ นับถอยหลังสู่รอบชิงชนะเลิศ (เวลาไทย ICT)',cdInit:'กำลังคำนวณ...',cdKickoff:'รอบชิงเริ่มแล้ว!🎉',
   step1H2:'🎯 เลือกซอฟต์แวร์ของคุณ',step1Desc:'เลือกซอฟต์แวร์ MIDAS เพื่อสร้างโครงสร้างลูกฟุตบอล',
   genNXDesc:'ซอฟต์แวร์วิเคราะห์โครงสร้างอาคาร<br>ไม่เชิงเส้น・ต้านแผ่นดินไหว・ตามสมรรถนะ<br>เวิร์กโฟลว์อัตโนมัติด้วย API',
   genNXBadge:'โครงสร้างอาคาร',
@@ -1420,8 +1420,8 @@ th:{
 // 버전 관리 — 여기 2줄만 고치면 헤더의 모든 언어에 자동 반영됨.
 // (i18n 문자열의 {ver}/{date} 토큰을 setLang 에서 치환)
 // ──────────────────────────────────────────────────────────────
-const APP_VERSION = '260625';     // YYMMDD
-const APP_UPDATED = '2026-06-25'; // 최신 업데이트 날짜
+const APP_VERSION = '2.0.0';      // 시맨틱 버전 (vMAJOR.MINOR.PATCH)
+const APP_UPDATED = '2026-06-27'; // 최신 업데이트 날짜
 function fillTokens(s){ return s.replace(/\{ver\}/g, APP_VERSION).replace(/\{date\}/g, APP_UPDATED); }
 
 // ──────────────────────────────────────────────────────────────
@@ -1525,10 +1525,10 @@ function setLang(lang) {
   try{localStorage.setItem('wizLang',lang);}catch(e){}
 }
 
-// ── D-Day countdown (2026 FIFA World Cup opening match, KST) ──
+// ── D-Day countdown (2026 FIFA World Cup FINAL) ──
 (function(){
-  // 2026-06-12 09:00 KST = UTC 2026-06-12 00:00:00
-  const target = new Date('2026-06-12T00:00:00Z');
+  // 2026-07-19 15:00 ET (EDT, UTC-4) = 2026-07-19 19:00:00 UTC = 2026-07-20 04:00 KST
+  const target = new Date('2026-07-19T19:00:00Z');
   function tick(){
     const el=document.getElementById('countdown-val'); if(!el) return;
     const diff=target-Date.now();
