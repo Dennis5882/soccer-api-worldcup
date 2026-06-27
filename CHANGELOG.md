@@ -3,11 +3,12 @@
 축구공(절단 정이십면체) 구조물 자동 생성 데모의 변경 이력입니다.
 
 버전 형식은 시맨틱 버전 `vMAJOR.MINOR.PATCH`. 헤더에 표시되는 버전·날짜는
-[index.html](index.html)의 `APP_VERSION` / `APP_UPDATED` 상수 **한 곳**에서 관리합니다.
+[js/app.js](js/app.js)의 `APP_VERSION` / `APP_UPDATED` 상수 **한 곳**에서 관리합니다.
 버전을 올릴 때는 그 두 상수를 수정하고, 아래에 항목을 추가하세요.
 
 ## v2.1.0 (2026-06-27)
 - 모델 생성 완료 후 자동으로 ISO 뷰 설정 — `POST /view/ANGLE` (H=30, V=15), Gen/Civil NX 공통 적용
+- `index.html` 리팩터링: CSS → `css/style.css`, 다국어 → `js/strings.js`, 로직 → `js/app.js` 분리 (2269줄 → 464줄)
 
 ## v2.0.0 (2026-06-27)
 - 버전 표기를 시맨틱 버전(`vX.X.X`) 형식으로 전환 (v2.0.0부터 시작)

@@ -10,8 +10,8 @@ A web app that auto-generates a soccer ball–shaped structural model using the 
 
 ## Stack
 
-- **Backend**: Node.js serverless functions (Vercel)
-- **Frontend**: HTML + Vanilla JS + Plotly.js
+- **Backend**: Node.js serverless functions (Vercel) — `api/`
+- **Frontend**: `index.html` (HTML skeleton) + `css/style.css` + `js/strings.js` (6-lang i18n) + `js/app.js` (logic) + Plotly.js
 - **External API**: MIDAS moa-engineers API
 
 ## API Endpoints
@@ -43,4 +43,5 @@ vercel deploy
 
 - No npm dependencies — pure Node.js
 - API key is passed from the client at runtime; no server-side env vars needed
-- CORS is open (`*`) for local development
+- Backend uses relative paths — no CORS configuration needed
+- To add a language: add one entry to `LANGS` in `js/app.js` and one translation block to `STRINGS` in `js/strings.js`
