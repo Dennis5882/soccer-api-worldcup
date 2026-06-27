@@ -192,6 +192,9 @@ module.exports = async function handler(req, res) {
       lcIdx++;
     }
 
+    await midas(base, apiKey, 'POST', '/view/ANGLE', { Argument: { HORIZONTAL: 30, VERTICAL: 15 } });
+    log('View set to ISO (H=30, V=15)');
+
     const productName = product === 'gen' ? 'Gen NX' : 'Civil NX';
     log(`${productName} model generated!`);
     return res.json({ ok: true, logs });
